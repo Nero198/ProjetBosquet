@@ -9,8 +9,8 @@ public class Test {
 		Artiste a2 = new Artiste("Versaevel","Florian","Charleroi");
 		AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
 		DAO<Artiste> artisteDAO = adf.getArtisteDAO();
-		//artisteDAO.create(a);
-		Artiste b = artisteDAO.find(a.getId());
+		artisteDAO.create(a);
+		Artiste b = ((ArtisteDAO)artisteDAO).find(a.getEmail());
 		System.out.println(b);
 		//artisteDAO.delete(a);
 		//artisteDAO.update(a2);
