@@ -9,22 +9,15 @@ import POJO.Commande;
 
 public class DAOFactory extends AbstractDAOFactory {
 	protected static final Connection conn = connection.ProjetConnection.getInstance();
-	@Override
 	public DAO<Artiste> getArtisteDAO() {
 		return new ArtisteDAO(conn);
 	}
-
-	@Override
 	public DAO<Client> getClientDAO() {
-		return null;
+		return new ClientDAO(conn);
 	}
-
-	@Override
 	public DAO<Categorie> getCatetogieDAO() {
 		return null;
 	}
-
-	@Override
 	public DAO<Commande> getCommandeDAO() {
 		return null;
 	}

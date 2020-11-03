@@ -33,5 +33,13 @@ public class Client extends Personne implements Serializable{
 		// TODO Auto-generated constructor stub
 		this.commandes=commandes;
 	}
+	public Client(String nom, String prenom, String adresse, String email, String password) {
+		super(nom, prenom, adresse, email, password);
+		// TODO Auto-generated constructor stub
+	}
+	public Client(String nom, String prenom, String adresse, String email, String password, int id) {
+		super(nom, prenom, adresse, email, password, id);
+		// TODO Auto-generated constructor stub
+	}
 	
 }
