@@ -15,7 +15,7 @@ public abstract class DAO<T>{
 	
 	public abstract boolean update(T obj);
 	
-	public abstract T find(String email);
+	public abstract T find(int Id);
 }
 
 

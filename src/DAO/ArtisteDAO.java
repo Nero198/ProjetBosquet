@@ -39,7 +39,7 @@ public class ArtisteDAO extends DAO<Artiste> {
 		try {
 			if(find(obj.getEmail())!=null)
 			{
-				String delete = "DELETE FROM Artiste where artiste_id = "+obj.getId()+";";
+				String delete = "DELETE FROM Personne where IdPersonne = "+obj.getId()+";";
 				System.out.println(delete);
 				connect.createStatement(
 						ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -59,9 +59,9 @@ public class ArtisteDAO extends DAO<Artiste> {
 
 	public boolean update(Artiste obj) {
 		try {
-			if(find(obj.getEmail())!=null)
+			if(find(obj.getId())!=null)
 			{
-				String update = "UPDATE Artiste set artiste_nom = '"+obj.getNom() +",artiste_prenom = '" + obj.getPrenom()+"',artiste_adresse = "+ obj.getAdresse()+ "' where artiste_id = "+obj.getId()+";";
+				String update = "UPDATE Personne set Nom = '"+obj.getNom() +",Prenom = '" + obj.getPrenom()+"',Adresse = "+ obj.getAdresse()+ "' where Email = "+obj.getEmail()+";";
 				System.out.println(update);
 				connect.createStatement(
 						ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -79,12 +79,25 @@ public class ArtisteDAO extends DAO<Artiste> {
 		}
 	}
 
-	public Artiste find(String email) {
+	public Artiste find(int Id) {
 		Artiste artiste = null;
 		try {
 			ResultSet result = this.connect
 					.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)
-					.executeQuery("SELECT * FROM Personne WHERE Email = '"+ email + "';");
+					.executeQuery("SELECT * FROM Personne WHERE IdPersonne = "+ Id + ";");
+			if (result.first())
+				artiste = new Artiste(result.getString("Nom"), result.getString("Prenom"), result.getString("Adresse"),result.getString("Email"),result.getString("MotDePasse"),result.getInt("IdPersonne"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return artiste;
+	}
+	public Artiste find(String Email) {
+		Artiste artiste = null;
+		try {
+			ResultSet result = this.connect
+					.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)
+					.executeQuery("SELECT * FROM Personne WHERE Email = '"+ Email + "';");
 			if (result.first())
 				artiste = new Artiste(result.getString("Nom"), result.getString("Prenom"), result.getString("Adresse"),result.getString("Email"),result.getString("MotDePasse"),result.getInt("IdPersonne"));
 		} catch (SQLException e) {
