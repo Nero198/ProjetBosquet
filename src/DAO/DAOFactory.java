@@ -2,10 +2,7 @@ package DAO;
 
 import java.sql.Connection;
 
-import POJO.Artiste;
-import POJO.Categorie;
-import POJO.Client;
-import POJO.Commande;
+import POJO.*;
 
 public class DAOFactory extends AbstractDAOFactory {
 	protected static final Connection conn = connection.ProjetConnection.getInstance();
@@ -16,10 +13,39 @@ public class DAOFactory extends AbstractDAOFactory {
 		return new ClientDAO(conn);
 	}
 	public DAO<Categorie> getCatetogieDAO() {
-		return null;
+		return new CategorieDAO(conn);
 	}
 	public DAO<Commande> getCommandeDAO() {
-		return null;
+		return new CommandeDAO(conn);
 	}
+	public DAO<Configuration> getConfigurationDAO(){
+		return new ConfigurationDAO(conn);
+	}
+	public DAO<Gestionnaire> getGestionnaireDAO(){
+		return new GestionnaireDAO(conn);
+	}
+	public DAO<Organisateur> getOrganisateurDAO(){
+		return new OrganisateurDAO(conn);
+	}
+	public DAO<Place> getPlaceDAO(){
+		return new PlaceDAO(conn);
+	}
+	public DAO<PlanningSalle> getPlanningSalleDAO(){
+		return new PlanningSalleDAO(conn);
+	}
+	public DAO<Representation> getRepresentationDAO(){
+		return new RepresentationDAO(conn);
+	}
+	public DAO<Reservation> getReservationDAO(){
+		return new ReservationDAO(conn);
+	}
+	public DAO<Spectacle> getSpectacleDAO(){
+		return new SpectacleDAO(conn);
+	}
+
+
+
+
+
 
 }
