@@ -20,10 +20,11 @@ public class Test {
 		DAO<Representation> representationDAO = adf.getRepresentationDAO();
 		DAO<Reservation> reservationDAO = adf.getReservationDAO();
 		DAO<Spectacle> spectacleDAO = adf.getSpectacleDAO();
+		DAO<Personne> personneDAO = adf.getPersonneDAO();
 		artisteDAO.create(a);
 		clientDAO.create(a2);
-		//Artiste b = ((ArtisteDAO)artisteDAO).find(a.getEmail());
-		//System.out.println(b);
+		Personne b = ((PersonneDAO)personneDAO).find(a2.getEmail());
+		System.out.println(b.getClass());
 		//artisteDAO.delete(a);
 		//artisteDAO.update(a2);
 	}

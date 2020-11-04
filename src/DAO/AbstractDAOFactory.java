@@ -30,6 +30,8 @@ public abstract class AbstractDAOFactory {
 	
 	public abstract DAO<Spectacle> getSpectacleDAO();
 	
+	public abstract DAO<Personne> getPersonneDAO();
+	
 	
 	public static AbstractDAOFactory getFactory(int type){
 		switch(type){
