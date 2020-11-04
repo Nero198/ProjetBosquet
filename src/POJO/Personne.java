@@ -73,6 +73,9 @@ public abstract class Personne implements Serializable{
 	public void setAdresse(String adresse) {
 		Adresse = adresse;
 	}
-	
+	public boolean verifierMotDePasse(String mdp)
+	{
+		return this.getPassword().equals(mdp);
+	}
 	
 }

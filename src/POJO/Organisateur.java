@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.*;
 
 public class Organisateur extends Personne implements Serializable{
+	public Organisateur(String nom, String prenom, String adresse, String email, String password) {
+		super(nom, prenom, adresse, email, password);
+		// TODO Auto-generated constructor stub
+	}
 	public Organisateur(String nom, String prenom, String adresse, String email, String password, List<Reservation> reservations) {
 		super(nom, prenom, adresse, email, password);
 		// TODO Auto-generated constructor stub
