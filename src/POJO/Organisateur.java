@@ -34,5 +34,9 @@ public class Organisateur extends Personne implements Serializable{
 		super(id,nom, prenom, adresse);
 		this.reservations=reservations;
 	}
+	public Organisateur() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 }

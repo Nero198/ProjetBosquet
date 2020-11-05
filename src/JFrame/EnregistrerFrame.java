@@ -64,7 +64,7 @@ public class EnregistrerFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EnregistrerFrame frame = new EnregistrerFrame();
+					LoginFrame frame = new LoginFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

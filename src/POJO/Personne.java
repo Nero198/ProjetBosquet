@@ -77,5 +77,7 @@ public abstract class Personne implements Serializable{
 	{
 		return this.getPassword().equals(mdp);
 	}
+	public Personne() {
+	}
 	
 }

@@ -107,7 +107,25 @@ public class LoginFrame extends JFrame {
 				if(p!=null)
 				{
 					if(p.verifierMotDePasse(motDePasse))
-						JOptionPane.showMessageDialog(null, "Bienvenu dans l'application");
+					{
+						if(p instanceof Artiste)
+						{
+							JOptionPane.showMessageDialog(null, "Artiste");
+						}
+						else if(p instanceof Client)
+						{
+							JOptionPane.showMessageDialog(null, "Client");
+						}
+						else if(p instanceof Organisateur)
+						{
+							JOptionPane.showMessageDialog(null, "Organisateur");
+						}
+						else
+						{
+							CreationSpectacle creationSpectacle = new CreationSpectacle(p);
+							creationSpectacle.setVisible(true);
+						}
+					}
 					else
 						JOptionPane.showMessageDialog(null, "Mot de passe incorrect");
 				}
