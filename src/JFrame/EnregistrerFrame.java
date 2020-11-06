@@ -9,19 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import DAO.AbstractDAOFactory;
 import DAO.DAO;
-import POJO.Artiste;
-import POJO.Categorie;
-import POJO.Client;
-import POJO.Commande;
-import POJO.Configuration;
-import POJO.Gestionnaire;
-import POJO.Organisateur;
-import POJO.Personne;
-import POJO.Place;
-import POJO.PlanningSalle;
-import POJO.Representation;
-import POJO.Reservation;
-import POJO.Spectacle;
+import POJO.*;
 
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;

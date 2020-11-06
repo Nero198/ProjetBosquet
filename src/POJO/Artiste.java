@@ -13,7 +13,7 @@ public class Artiste extends Personne implements Serializable{
 		super(nom, prenom, adresse);
 	}
 	public String toString() {
-		return "Artiste [Nom=" + Nom + ", Prenom=" + Prenom + ", Adresse=" + Adresse + ", Id=" + Id + "]";
+		return Nom + " " + Prenom + " " + Id;
 	}
 	public Artiste(String nom, String prenom, String adresse, String email, String password) {
 		super(nom, prenom, adresse, email, password);
