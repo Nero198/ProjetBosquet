@@ -11,5 +11,6 @@
 	<classpathentry kind="lib" path="C:/dev/java/ProjetSpectacle/hsqldb-2.5.0.jar"/>
 	<classpathentry kind="lib" path="C:/dev/java/ProjetSpectacle/jackcess-3.0.1.jar"/>
 	<classpathentry kind="lib" path="C:/dev/java/ProjetSpectacle/ucanaccess-5.0.0.jar"/>
+	<classpathentry kind="lib" path="jcalendar-1.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
