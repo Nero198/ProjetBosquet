@@ -1,6 +1,7 @@
 package POJO;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Reservation implements Serializable {
 	
@@ -46,6 +47,41 @@ public class Reservation implements Serializable {
 		this.statut = statut;
 		this.prix = prix;
 		this.planningSale = planningSale;
+	}
+	
+	public Reservation() {
+		// TODO Auto-generated constructor stub
+	}
+	public void calculerPrixSalle()
+	{
+		this.prix=this.accompte;
+		int cpt=0;
+		Date date=new Date();
+		date=this.planningSale.getDateDebutReservation();
+		do
+		{
+			if(date.getDay()-1>=0 && date.getDay()-1<5)
+			{
+				this.prix+=3000;
+			}
+			else
+			{
+				this.prix+=4500;
+			}
+			date.setDate(date.getDate()+1);
+			cpt++;
+		}while(date.before(this.planningSale.getDateFinReservation()));
+		System.out.println(this.prix);
+		if(cpt==2)
+			this.prix*=0.95;
+		else if(cpt>=3 && cpt<7)
+			this.prix*=0.9;
+		else if(cpt>=7 && cpt<15)
+			this.prix*=0.80;
+		else if(cpt>=15)
+			this.prix*=0.7;
+		System.out.println(this.prix);
+		this.solde=this.prix-this.accompte;
 	}
 	
 }

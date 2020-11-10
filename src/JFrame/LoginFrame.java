@@ -119,11 +119,14 @@ public class LoginFrame extends JFrame {
 						else if(p instanceof Organisateur)
 						{
 							JOptionPane.showMessageDialog(null, "Organisateur");
+							ReservationSalle creationSpectacle = new ReservationSalle((Organisateur) p);
+							contentPane.setVisible(false);
+							creationSpectacle.setVisible(true);
 						}
 						else
 						{
-							CreationSpectacle creationSpectacle = new CreationSpectacle(p);
-							creationSpectacle.setVisible(true);
+							contentPane.setVisible(false);
+							JOptionPane.showMessageDialog(null, "Gestionnaire");
 						}
 					}
 					else

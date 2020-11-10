@@ -3,7 +3,12 @@ package POJO;
 import java.io.Serializable;
 import java.util.*;
 
+import DAO.AbstractDAOFactory;
+import DAO.DAO;
+
 public class Organisateur extends Personne implements Serializable{
+	AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
+	DAO<Organisateur> organisateurDAO = adf.getOrganisateurDAO();
 	public Organisateur(String nom, String prenom, String adresse, String email, String password) {
 		super(nom, prenom, adresse, email, password);
 		// TODO Auto-generated constructor stub
@@ -38,5 +43,7 @@ public class Organisateur extends Personne implements Serializable{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	public void reserverSalle(Reservation r)
+	{
+	}
 }

@@ -1,3 +1,7 @@
+
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 import DAO.*;
 import POJO.*;
 
@@ -21,12 +25,32 @@ public class Test {
 		DAO<Reservation> reservationDAO = adf.getReservationDAO();
 		DAO<Spectacle> spectacleDAO = adf.getSpectacleDAO();
 		DAO<Personne> personneDAO = adf.getPersonneDAO();
-		artisteDAO.create(a);
-		clientDAO.create(a2);
-		Personne b = ((PersonneDAO)personneDAO).find(a2.getEmail());
-		System.out.println(b.getClass());
-		//artisteDAO.delete(a);
-		//artisteDAO.update(a2);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		Date d1 = new Date(0, 0, 0);
+		Date d2 = new Date(0, 0, 0);
+		d1.setDate(13);
+		d1.setYear(120);
+		d2.setDate(14);
+		d2.setYear(120);
+		System.out.println(dateFormat.format(d1));
+		System.out.println(dateFormat.format(d2));
+		PlanningSalle Ps = new PlanningSalle(d1,d2,null);
+		System.out.println(Ps.getDateDebutReservation());
+		planningSalleDAO.create(Ps);
+		//Ps.verifierDisponibilite();
+		//r.CalculerPrixSalle();
+		/*PlanningSalle Ps;
+		Date d1;
+		Date d2;
+		try {
+		    d1 = dateFormat.parse("19/11/2020 12:00");
+		    d2 = dateFormat.parse("25/11/2020 12:00:00");
+		    System.out.print(d1);
+			Ps = new PlanningSalle(d1,d2,null);
+			planningSalleDAO.create(Ps);
+		 } catch (ParseException ex) {
+		    ex.printStackTrace();
+		 }*/
 	}
 
 }
