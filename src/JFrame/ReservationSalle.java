@@ -5,11 +5,13 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import com.toedter.calendar.JCalendar;
 
 import DAO.AbstractDAOFactory;
 import DAO.DAO;
+import DAO.PlanningSalleDAO;
 import POJO.*;
 
 import javax.swing.JLabel;
@@ -18,11 +20,15 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.List;
+import java.sql.Date;
 import java.awt.event.ActionEvent;
 
 public class ReservationSalle extends JFrame {
-
+	AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
+	DAO<PlanningSalle> planningSalleDAO = adf.getPlanningSalleDAO();
 	private JPanel contentPane;
 	Date dateDebut = null;
 	Date dateFin = null;
@@ -60,16 +66,20 @@ public class ReservationSalle extends JFrame {
 
 		JCalendar calendar = new JCalendar();
 		calendar.setBounds(10, 10, 206, 152);
-		/*RangeEvaluator evaluator = new RangeEvaluator();
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-	    List<PlanningSalle> planningSalle = ((PlanningSalleDAO)planningSalleDAO).find()
-	    try {
-			evaluator.setStartDate(dateFormat.parse("11-11-2020"));
-		    evaluator.setEndDate(dateFormat.parse("15-11-2020"));
+	    List<PlanningSalle> planningSalle = ((PlanningSalleDAO)planningSalleDAO).find();
+	    for(var ps : planningSalle) {
+	    	RangeEvaluator evaluator = new RangeEvaluator();
+	    	
+	    	int a = ps.getDateDebutReservation().getDate()+1;
+	    	int b = ps.getDateFinReservation().getDate()-1;
+	    	Date dateDebut = new Date(ps.getDateDebutReservation().getYear(),ps.getDateDebutReservation().getMonth(),a);
+	    	Date dateFin = new Date(ps.getDateFinReservation().getYear(),ps.getDateFinReservation().getMonth(),b);
+			evaluator.setStartDate(dateDebut);
+		    evaluator.setEndDate(dateFin);
 		    calendar.getDayChooser().addDateEvaluator(evaluator);
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}*/
+		    SwingUtilities.updateComponentTreeUI(calendar);
+		}
 		contentPane.add(calendar);
 		
 		JLabel LblDateDebut = new JLabel("");
@@ -99,8 +109,9 @@ public class ReservationSalle extends JFrame {
 		BtnValider.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (dateDebut == null) {
-					dateDebut = calendar.getDate();
-					if(dateDebut.before(new Date()))
+					dateDebut = new java.sql.Date(calendar.getDate().getTime());
+					java.sql.Date now = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+					if(dateDebut.before(now))
 					{
 						dateDebut = null;
 					}
@@ -112,7 +123,7 @@ public class ReservationSalle extends JFrame {
 				if (dateFin == null && dateDebut!=null) 
 				{	
 					BtnValider.setText("Valider la date de fin");
-					dateFin = calendar.getDate();
+					dateFin = new java.sql.Date(calendar.getDate().getTime());
 					if(dateDebut.after(dateFin) || dateFin.equals(dateDebut))
 					{
 						dateFin = null;
@@ -151,7 +162,6 @@ public class ReservationSalle extends JFrame {
 				PlanningSalle PS = new PlanningSalle((java.sql.Date)dateDebut,(java.sql.Date)dateFin,null);
 				AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
 				DAO<PlanningSalle> planningSalleDAO = adf.getPlanningSalleDAO();
-				planningSalleDAO.create(PS);
 				if(PS.verifierDisponibilite())// false pas Libre - true Libre
 				{
 					Reservation r = new Reservation(5000,0,null,0,PS);
@@ -159,7 +169,7 @@ public class ReservationSalle extends JFrame {
 					CreationSpectacle frame = new CreationSpectacle(o);
 					contentPane.setVisible(false);
 					frame.setVisible(true);
-					//o.reserverSalle(r);
+					o.reserverSalle(r);
 				}
 				else
 				{

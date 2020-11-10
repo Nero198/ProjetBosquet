@@ -1,8 +1,12 @@
 package POJO;
 
 import java.io.Serializable;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.time.LocalDate;
+import java.util.List;
 
 import DAO.AbstractDAOFactory;
 import DAO.*;
@@ -37,26 +41,48 @@ public class PlanningSalle implements Serializable{
 		this.dateFinReservation = dateFinReservation;
 		this.spectacle = spectacle;
 	}
+	@SuppressWarnings("deprecation")
 	public boolean verifierDisponibilite() {
 		List<PlanningSalle> liste = ((PlanningSalleDAO)planningSalleDAO).find();
-		boolean dispo = false;
-		for(var ps : liste)
+		boolean verif = false;
+		if(liste.size()==0)
 		{
-			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-			System.out.println(this.dateDebutReservation.compareTo(ps.dateDebutReservation));
-			System.out.println(dateFormat.format(ps.dateDebutReservation));
-			if((this.dateDebutReservation.compareTo(ps.dateDebutReservation)>0)&&((this.dateDebutReservation.compareTo(ps.dateFinReservation)<0)))
-				return false;
-			else
+			return true;
+		}
+		else
+		{
+			for(var ps : liste)
 			{
-				dispo=true;
-				if((this.dateFinReservation.compareTo(ps.dateDebutReservation)>0)&&((this.dateFinReservation.compareTo(ps.dateFinReservation)<0)))
-					return false;
+				Date a = new Date(ps.dateDebutReservation.getYear(),ps.dateDebutReservation.getMonth(),ps.dateDebutReservation.getDate());
+				Date b = new Date(ps.dateFinReservation.getYear(),ps.dateFinReservation.getMonth(),ps.dateFinReservation.getDate());
+				Date d = new Date(this.dateFinReservation.getYear(),this.dateFinReservation.getMonth(),this.dateFinReservation.getDate());
+				Date c = new Date(this.dateDebutReservation.getYear(),this.dateDebutReservation.getMonth(),this.dateDebutReservation.getDate());
+				long aa = a.getTime();
+				long bb = b.getTime();
+				long cc = c.getTime();
+				long dd = d.getTime();
+				if((cc>aa&&cc<bb)||(dd>aa&&dd<bb)||(cc<aa&&dd>bb))
+				{
+						return false;
+				}
 				else
-					dispo=true;
+				{
+					if(cc==aa && dd==bb)
+					{
+						return false;
+					}
+					else
+					{
+						verif=true;
+					}
+				}
 			}
 		}
-		return dispo;
+		return verif;
+	}
+	public void creerPlanningSalle(Organisateur o)
+	{
+		planningSalleDAO.create(this);
 	}
 	
 }
