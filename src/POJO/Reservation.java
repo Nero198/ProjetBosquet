@@ -2,9 +2,11 @@ package POJO;
 
 import java.io.Serializable;
 import java.util.Date;
-
+import DAO.AbstractDAOFactory;
+import DAO.DAO;
 public class Reservation implements Serializable {
-	
+	AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
+	DAO<Reservation> reservationDAO = adf.getReservationDAO();
 	private static final long serialVersionUID = 7982945450646152881L;
 	private int accompte;
 	private int solde;
@@ -71,7 +73,6 @@ public class Reservation implements Serializable {
 			date.setDate(date.getDate()+1);
 			cpt++;
 		}while(date.before(this.planningSale.getDateFinReservation()));
-		System.out.println(this.prix);
 		if(cpt==2)
 			this.prix*=0.95;
 		else if(cpt>=3 && cpt<7)
@@ -80,11 +81,11 @@ public class Reservation implements Serializable {
 			this.prix*=0.80;
 		else if(cpt>=15)
 			this.prix*=0.7;
-		System.out.println(this.prix);
 		this.solde=this.prix-this.accompte;
 	}
-	public void creerReservation() {
-		
+	public void creerReservation(Organisateur o) {
+		reservationDAO.create(this);
+		this.planningSale.creerPlanningSalle(o);
 	}
 	
 }
