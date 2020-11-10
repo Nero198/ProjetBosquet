@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import com.toedter.calendar.JCalendar;
 
+import DAO.AbstractDAOFactory;
+import DAO.DAO;
 import POJO.*;
 
 import javax.swing.JLabel;
@@ -146,13 +148,10 @@ public class ReservationSalle extends JFrame {
 		
 		BtnOui.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dateDebut.setHours(12);
-				dateDebut.setMinutes(00);
-				dateDebut.setSeconds(00);
-				dateFin.setHours(12);
-				dateFin.setMinutes(00);
-				dateFin.setSeconds(00);
-				PlanningSalle PS = new PlanningSalle(dateDebut,dateFin,null);
+				PlanningSalle PS = new PlanningSalle((java.sql.Date)dateDebut,(java.sql.Date)dateFin,null);
+				AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
+				DAO<PlanningSalle> planningSalleDAO = adf.getPlanningSalleDAO();
+				planningSalleDAO.create(PS);
 				if(PS.verifierDisponibilite())// false pas Libre - true Libre
 				{
 					Reservation r = new Reservation(5000,0,null,0,PS);
@@ -160,7 +159,7 @@ public class ReservationSalle extends JFrame {
 					CreationSpectacle frame = new CreationSpectacle(o);
 					contentPane.setVisible(false);
 					frame.setVisible(true);
-					o.reserverSalle(r);
+					//o.reserverSalle(r);
 				}
 				else
 				{

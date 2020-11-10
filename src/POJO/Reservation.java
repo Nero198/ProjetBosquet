@@ -83,5 +83,8 @@ public class Reservation implements Serializable {
 		System.out.println(this.prix);
 		this.solde=this.prix-this.accompte;
 	}
+	public void creerReservation() {
+		
+	}
 	
 }
