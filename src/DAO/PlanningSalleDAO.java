@@ -37,7 +37,6 @@ public class PlanningSalleDAO extends DAO<PlanningSalle>{
 			ps.setDate(2, (java.sql.Date)obj.getDateFinReservation());
 			ps.setInt(3, 12);
 			ps.executeUpdate();
-			System.out.print(insertion2);
 			return true;
 			
 		} catch (SQLException e) {

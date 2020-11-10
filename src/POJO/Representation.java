@@ -1,7 +1,7 @@
 package POJO;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.*;
 
 public class Representation implements Serializable {
 	

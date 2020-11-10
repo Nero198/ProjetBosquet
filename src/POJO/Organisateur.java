@@ -45,6 +45,7 @@ public class Organisateur extends Personne implements Serializable{
 	}
 	public void reserverSalle(Reservation r)
 	{
-		r.creerReservation(this);
+		this.reservations.add(r);
+		r.creerReservation();
 	}
 }
