@@ -23,19 +23,11 @@ public class PlanningSalleDAO extends DAO<PlanningSalle>{
 	public boolean create(PlanningSalle obj) {
 		try {
 			PreparedStatement ps = null;
-			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-			String insertion2 = "INSERT INTO PlanningSalle (DateDebut,DateFin,IdOrganisateur) VALUES (?,?,?)";
-			
-			/*String insertion = "INSERT INTO PlanningSalle (DateDebut,DateFin,IdOrganisateur) VALUES (#" + dateFormat.format(obj.getDateDebutReservation()) + "#,#" + dateFormat.format(obj.getDateFinReservation())+"#,12)";
-			System.out.println(insertion);
-			connect.createStatement(
-					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate(insertion);*/
+			String insertion2 = "INSERT INTO PlanningSalle (DateDebut,DateFin) VALUES (?,?)";
 			ps = connect.prepareStatement(insertion2);
 			connect.createStatement();
 			ps.setDate(1, (java.sql.Date)obj.getDateDebutReservation());
 			ps.setDate(2, (java.sql.Date)obj.getDateFinReservation());
-			ps.setInt(3, 12);
 			ps.executeUpdate();
 			System.out.print(insertion2);
 			return true;
@@ -80,5 +72,19 @@ public class PlanningSalleDAO extends DAO<PlanningSalle>{
 		}
 		return PlanningSalle;
 	}
+	public int findByDate(PlanningSalle ps)
+	{
+		int id=0;
+		try {
 
+			String query = "SELECT * from PlanningSalle where (DateDebut = " + ps.getDateDebutReservation() +") and (DateFin = "+ps.getDateFinReservation()+")";
+			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)
+					.executeQuery(query);
+			id = result.getInt("IdSalle");
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return id;
+	}
 }

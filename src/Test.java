@@ -9,7 +9,7 @@ public class Test {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Artiste a = new Artiste("Versaevel","Florian","Courcelles","Versaevel.florian@hotmail.com","Test2019");
+		Organisateur a = new Organisateur("Versaevel","Florian","Courcelles","Versaevel.florian@hotmail.com","Test2019");
 		Client a2 = new Client("Versaevel","Florian","Courcelles","Versaevel.test@hotmail.com","Test2019");
 		AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
 		DAO<Artiste> artisteDAO = adf.getArtisteDAO();
@@ -26,17 +26,8 @@ public class Test {
 		DAO<Spectacle> spectacleDAO = adf.getSpectacleDAO();
 		DAO<Personne> personneDAO = adf.getPersonneDAO();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		Date d1 = new Date(0, 0, 0);
-		Date d2 = new Date(0, 0, 0);
-		d1.setDate(13);
-		d1.setYear(120);
-		d2.setDate(14);
-		d2.setYear(120);
-		System.out.println(dateFormat.format(d1));
-		System.out.println(dateFormat.format(d2));
-		PlanningSalle Ps = new PlanningSalle(d1,d2,null);
-		System.out.println(Ps.getDateDebutReservation());
-		planningSalleDAO.create(Ps);
+		
+		((ReservationDAO) reservationDAO).ajoutOrganisateur(a);
 		//Ps.verifierDisponibilite();
 		//r.CalculerPrixSalle();
 		/*PlanningSalle Ps;

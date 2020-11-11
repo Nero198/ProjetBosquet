@@ -5,6 +5,7 @@ import java.util.*;
 
 import DAO.AbstractDAOFactory;
 import DAO.DAO;
+import DAO.OrganisateurDAO;
 
 public class Organisateur extends Personne implements Serializable{
 	AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
@@ -45,6 +46,7 @@ public class Organisateur extends Personne implements Serializable{
 	}
 	public void reserverSalle(Reservation r)
 	{
-		r.creerReservation(this);
+		Organisateur o = ((OrganisateurDAO)organisateurDAO).find(this.getEmail());
+		r.creerReservation(o);
 	}
 }

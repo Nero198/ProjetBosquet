@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import DAO.AbstractDAOFactory;
 import DAO.*;
 
 public class PlanningSalle implements Serializable{
@@ -77,8 +76,13 @@ public class PlanningSalle implements Serializable{
 		return verif;
 	
 	}
-	public void creerPlanningSalle(Organisateur o)
+	public void creerPlanningSalle()
 	{
 		planningSalleDAO.create(this);
+	}
+	public int find()
+	{
+		int id = ((PlanningSalleDAO) planningSalleDAO).findByDate(this);
+		return id;
 	}
 }
