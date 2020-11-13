@@ -46,6 +46,7 @@ public class Organisateur extends Personne implements Serializable{
 	}
 	public void reserverSalle(Reservation r)
 	{
+		System.out.print("Dans Orga");
 		Organisateur o = ((OrganisateurDAO)organisateurDAO).find(this.getEmail());
 		r.creerReservation(o);
 	}

@@ -26,8 +26,12 @@ public class Test {
 		DAO<Spectacle> spectacleDAO = adf.getSpectacleDAO();
 		DAO<Personne> personneDAO = adf.getPersonneDAO();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		
-		((ReservationDAO) reservationDAO).ajoutOrganisateur(a);
+		var test = ((PlanningSalleDAO)planningSalleDAO).find();
+		for(var i : test)
+		{
+			System.out.println(i.getDateDebutReservation());
+		}
+		//((ReservationDAO) reservationDAO).ajoutOrganisateur(a);
 		//Ps.verifierDisponibilite();
 		//r.CalculerPrixSalle();
 		/*PlanningSalle Ps;

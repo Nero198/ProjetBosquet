@@ -49,4 +49,7 @@ public class Spectacle implements Serializable{
 		this.configuration = configuration;
 		this.representations = representations;
 	}
+	public Spectacle() {
+		// TODO Auto-generated constructor stub
+	}
 }

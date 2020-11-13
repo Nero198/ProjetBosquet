@@ -18,6 +18,7 @@ public class ReservationDAO extends DAO<Reservation>{
 	@Override
 	public boolean create(Reservation obj) {
 		try {
+			System.out.println("Ajout de la reservation");
 			PreparedStatement ps = null;
 			String insertion2 = "INSERT INTO Reservation (Solde,IdSalle,IdOrganisateur,Statut,Accompte,Prix) VALUES (?,?,?,?,?,?)";
 			ps = connect.prepareStatement(insertion2);
@@ -25,8 +26,9 @@ public class ReservationDAO extends DAO<Reservation>{
 			ps.setInt(1, obj.getSolde());
 			var planningSalle = obj.getPlanningSalle();
 			int idSalle = planningSalle.find();
+			System.out.println(idSalle);
 			ps.setInt(2, idSalle);
-			ps.setString(4, obj.getStatut());
+			ps.setString(4, "Payé");
 			ps.setInt(5, obj.getAccompte());			
 			ps.setInt(6, obj.getPrix());
 			ps.executeUpdate();
@@ -58,6 +60,7 @@ public class ReservationDAO extends DAO<Reservation>{
 	}
 	public boolean ajoutOrganisateur(Organisateur o) {
 		try {
+			System.out.print("Ajout de l'orga");
 			String update = "UPDATE Reservation set IdOrganisateur =" +o.getId()+" where IdOrganisateur is null";
 			System.out.println(update);
 			connect.createStatement(

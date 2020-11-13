@@ -87,9 +87,14 @@ public class Reservation implements Serializable {
 		this.solde=this.prix-this.accompte;
 	}
 	public void creerReservation(Organisateur o) {
+		this.planningSalle.creerPlanningSalle();
 		reservationDAO.create(this);
 		((ReservationDAO) reservationDAO).ajoutOrganisateur(o);
-		this.planningSalle.creerPlanningSalle();
+	}
+	@Override
+	public String toString() {
+		return "Reservation [accompte=" + accompte + ", solde=" + solde + ", statut=" + statut + ", prix=" + prix
+				+ ", planningSalle=" + planningSalle + "]";
 	}
 	
 }

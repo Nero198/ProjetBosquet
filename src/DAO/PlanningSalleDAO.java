@@ -64,7 +64,7 @@ public class PlanningSalleDAO extends DAO<PlanningSalle>{
 			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)
 					.executeQuery(query);
 				while(result.next()) {
-					PlanningSalle PS = new PlanningSalle(result.getDate("DateDebut"),result.getDate("DateFin"),null);
+					PlanningSalle PS = new PlanningSalle(result.getDate("DateDebut"),result.getDate("DateFin"),null,result.getInt("IdSalle"));
 					PlanningSalle.add(PS);
 				}	
 		} catch (SQLException e) {
@@ -76,12 +76,13 @@ public class PlanningSalleDAO extends DAO<PlanningSalle>{
 	{
 		int id=0;
 		try {
-
-			String query = "SELECT * from PlanningSalle where (DateDebut = " + ps.getDateDebutReservation() +") and (DateFin = "+ps.getDateFinReservation()+")";
+			System.out.print("Find By Date");
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			String query = "SELECT * from PlanningSalle where (DateDebut = " + dateFormat.format(ps.getDateDebutReservation()) +")";
 			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)
 					.executeQuery(query);
 			id = result.getInt("IdSalle");
-				
+			System.out.println(id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

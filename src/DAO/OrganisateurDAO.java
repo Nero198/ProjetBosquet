@@ -93,6 +93,7 @@ public class OrganisateurDAO extends DAO<Organisateur> {
 		return organisateur;
 	}
 	public Organisateur find(String Email) {
+		System.out.print("Recherche de l'orga");
 		Organisateur organisateur = null;
 		try {
 			ResultSet result = this.connect

@@ -21,6 +21,7 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.sql.Date;
@@ -159,17 +160,20 @@ public class ReservationSalle extends JFrame {
 
 		BtnOui.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PlanningSalle PS = new PlanningSalle((java.sql.Date)dateDebut,(java.sql.Date)dateFin,null);
+				List<Spectacle> s = new ArrayList<Spectacle>();
+				PlanningSalle PS = new PlanningSalle((java.sql.Date)dateDebut,(java.sql.Date)dateFin,s);
 				AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
 				DAO<PlanningSalle> planningSalleDAO = adf.getPlanningSalleDAO();
 				if(PS.verifierDisponibilite())// false pas Libre - true Libre
 				{
-					Reservation r = new Reservation(5000,0,null,0,PS);
+					Reservation r = new Reservation(5000,0,"Payé",0,PS);
 					r.calculerPrixSalle();
 					CreationSpectacle frame = new CreationSpectacle(o);
 					contentPane.setVisible(false);
 					frame.setVisible(true);
-					o.reserverSalle(r);
+
+					System.out.println(r);
+					//o.reserverSalle(r);
 				}
 				else
 				{
