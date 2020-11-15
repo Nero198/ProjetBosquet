@@ -166,7 +166,7 @@ public class ReservationSalle extends JFrame {
 				DAO<PlanningSalle> planningSalleDAO = adf.getPlanningSalleDAO();
 				if(PS.verifierDisponibilite())// false pas Libre - true Libre
 				{
-					Reservation r = new Reservation(5000,0,"Payé",0,PS);
+					Reservation r = new Reservation(0,0,"Payé",0,PS);
 					r.calculerPrixSalle();
 					CreationSpectacle frame = new CreationSpectacle(o);
 					contentPane.setVisible(false);

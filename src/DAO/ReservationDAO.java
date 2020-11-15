@@ -63,12 +63,11 @@ public class ReservationDAO extends DAO<Reservation>{
 	public boolean ajoutOrganisateur(Organisateur o) {
 		try {
 			System.out.print("Ajout de l'orga");
-			String update = "UPDATE Reservation set IdOrganisateur =" +o.getId()+" where IdOrganisateur is null";
+			String update = "UPDATE Reservation set IdOrganisateur =" +o.getId()+" where IdOrganisateur = 13";
 			System.out.println(update);
 			connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY).executeUpdate(update);	
-			
 			return true;
 			
 		} catch (SQLException e) {
