@@ -28,8 +28,10 @@ public class ReservationDAO extends DAO<Reservation>{
 			int idSalle = planningSalle.find();
 			System.out.println(idSalle);
 			ps.setInt(2, idSalle);
+			ps.setInt(3, 13);
 			ps.setString(4, "Payé");
-			ps.setInt(5, obj.getAccompte());			
+			System.out.print("payé");
+			ps.setInt(5, obj.getAccompte());		
 			ps.setInt(6, obj.getPrix());
 			ps.executeUpdate();
 			System.out.print(insertion2);

@@ -172,8 +172,8 @@ public class ReservationSalle extends JFrame {
 					contentPane.setVisible(false);
 					frame.setVisible(true);
 
-					System.out.println(r);
-					//o.reserverSalle(r);
+					//System.out.println(r);
+					o.reserverSalle(r);
 				}
 				else
 				{
