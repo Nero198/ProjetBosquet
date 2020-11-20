@@ -18,7 +18,6 @@ public class ReservationDAO extends DAO<Reservation>{
 	@Override
 	public boolean create(Reservation obj) {
 		try {
-			System.out.println("Ajout de la reservation");
 			PreparedStatement ps = null;
 			String insertion2 = "INSERT INTO Reservation (Solde,IdSalle,IdOrganisateur,Statut,Accompte,Prix) VALUES (?,?,?,?,?,?)";
 			ps = connect.prepareStatement(insertion2);

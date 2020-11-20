@@ -1,7 +1,15 @@
 package DAO;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
+import POJO.Artiste;
+import POJO.Client;
+import POJO.Gestionnaire;
+import POJO.Organisateur;
+import POJO.Personne;
 import POJO.Spectacle;
 
 public class SpectacleDAO extends DAO<Spectacle>{
@@ -13,8 +21,21 @@ public class SpectacleDAO extends DAO<Spectacle>{
 
 	@Override
 	public boolean create(Spectacle obj) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			PreparedStatement ps = null;
+			String insertion2 = "INSERT INTO Spectacle (Titre,NbrePlaceMax) VALUES (?,?)";
+			ps = connect.prepareStatement(insertion2);
+			connect.createStatement();
+			ps.setString(1, obj.getTitre());
+			ps.setInt(2, obj.getNbrPlaceParClient());
+			ps.executeUpdate();
+			System.out.print(insertion2);
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	@Override
@@ -34,5 +55,49 @@ public class SpectacleDAO extends DAO<Spectacle>{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	public boolean ajoutDeLaSalle(int Id)
+	{
+		try {
+			String update = "UPDATE spectacle set IdSalle =" +Id+" where IdSalle=0";
+			System.out.println(update);
+			connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeUpdate(update);	
+			return true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	public int getId(Spectacle spectacle,int IdSalle)
+	{
+		int i = 0;
+		try {
+			ResultSet result = this.connect
+					.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)
+					.executeQuery("SELECT * FROM spectacle WHERE (Titre = '"+ spectacle.getTitre() + "' and IdSalle = '" + IdSalle +"');");
+			if(result.first())
+				i = result.getInt("IdSpectacle");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return i;
+	}
+	public Boolean ajoutArtisteSpectacle(int idSpectacle,int idArtiste)
+	{
+		try {
+			String insertion = "INSERT INTO ArtisteSpectacle (IdArtiste,IdSpectacle) VALUES ('"+ idArtiste + "','"+ idSpectacle+"')";
+			System.out.println(idSpectacle + " " + idArtiste);
+			System.out.println(insertion);
+			connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeUpdate(insertion);
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

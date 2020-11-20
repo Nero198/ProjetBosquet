@@ -93,7 +93,7 @@ public class PersonneDAO extends DAO<Personne>{
 				case "Artiste" : personne = new Artiste (result.getString("Nom"), result.getString("Prenom"), result.getString("Adresse"),result.getString("Email"),result.getString("MotDePasse"),result.getInt("IdPersonne"));
 					break;
 				case "Organisateur" : personne = new Organisateur (result.getString("Nom"), result.getString("Prenom"), result.getString("Adresse"),result.getString("Email"),result.getString("MotDePasse"),result.getInt("IdPersonne"));
-					break;
+					break;			
 				case "Gestionnaire" : personne = new Gestionnaire (result.getString("Nom"), result.getString("Prenom"), result.getString("Adresse"),result.getString("Email"),result.getString("MotDePasse"),result.getInt("IdPersonne"));
 					break;
 				default : personne = new Client (result.getString("Nom"), result.getString("Prenom"), result.getString("Adresse"),result.getString("Email"),result.getString("MotDePasse"),result.getInt("IdPersonne"));

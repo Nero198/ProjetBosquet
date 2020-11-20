@@ -49,6 +49,9 @@ public class PlanningSalle implements Serializable{
 		this.dateFinReservation = dateFinReservation;
 		this.spectacle = spectacle;
 	}
+	public PlanningSalle() {
+		// TODO Auto-generated constructor stub
+	}
 	@SuppressWarnings("deprecation")
 	public boolean verifierDisponibilite() {
 		List<PlanningSalle> liste = ((PlanningSalleDAO)planningSalleDAO).find();

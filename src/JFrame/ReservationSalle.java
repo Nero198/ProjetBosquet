@@ -162,17 +162,13 @@ public class ReservationSalle extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				List<Spectacle> s = new ArrayList<Spectacle>();
 				PlanningSalle PS = new PlanningSalle((java.sql.Date)dateDebut,(java.sql.Date)dateFin,s);
-				AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
-				DAO<PlanningSalle> planningSalleDAO = adf.getPlanningSalleDAO();
-				if(PS.verifierDisponibilite())// false pas Libre - true Libre
+				if(PS.verifierDisponibilite())
 				{
 					Reservation r = new Reservation(0,0,"Payé",0,PS);
 					r.calculerPrixSalle();
-					CreationSpectacle frame = new CreationSpectacle(o);
+					CreationSpectacle frame = new CreationSpectacle(o,PS);
 					contentPane.setVisible(false);
 					frame.setVisible(true);
-
-					//System.out.println(r);
 					o.reserverSalle(r);
 				}
 				else
@@ -185,7 +181,7 @@ public class ReservationSalle extends JFrame {
 					LblConfirmer.setVisible(false);
 					BtnOui.setVisible(false);
 					BtnNon.setVisible(false);
-					JOptionPane.showMessageDialog(null, "La salle est déjà reservée aces dates là");
+					JOptionPane.showMessageDialog(null, "La salle est déjà reservée à ces dates là");
 				}
 			}
 		});

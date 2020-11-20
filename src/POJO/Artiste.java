@@ -2,8 +2,13 @@ package POJO;
 
 import java.io.Serializable;
 
+import DAO.AbstractDAOFactory;
+import DAO.ArtisteDAO;
+import DAO.DAO;
+
 public class Artiste extends Personne implements Serializable{
-	
+	AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
+	DAO<Artiste> artisteDAO = adf.getArtisteDAO();
 	private static final long serialVersionUID = -2092818064731977166L;
 	
 	public Artiste(int id, String nom, String prenom, String adresse) {
@@ -23,5 +28,8 @@ public class Artiste extends Personne implements Serializable{
 		super(nom, prenom, adresse, email, password, id);
 		// TODO Auto-generated constructor stub
 	}
-
+	public Artiste find()
+	{
+		return ((ArtisteDAO)artisteDAO).find(this.getEmail());
+	}
 }

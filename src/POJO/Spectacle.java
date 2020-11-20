@@ -3,8 +3,13 @@ package POJO;
 import java.io.Serializable;
 import java.util.*;
 
+import DAO.AbstractDAOFactory;
+import DAO.DAO;
+import DAO.SpectacleDAO;
+
 public class Spectacle implements Serializable{
-	
+	AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
+	DAO<Spectacle> spectacleDAO = adf.getSpectacleDAO();
 	private static final long serialVersionUID = 2873764636877910333L;
 	private String titre;
 	private List<Artiste> Artistes;
@@ -51,5 +56,23 @@ public class Spectacle implements Serializable{
 	}
 	public Spectacle() {
 		// TODO Auto-generated constructor stub
+	}
+	@Override
+	public String toString() {
+		return "Spectacle [titre=" + titre + ", Artistes=" + Artistes + ", nbrPlaceParClient=" + nbrPlaceParClient
+				+ ", configuration=" + configuration + ", representations=" + representations + "]";
+	}
+	public void ajouterSpectacle(PlanningSalle ps)
+	{
+		spectacleDAO.create(this);
+		int f=ps.find();
+		((SpectacleDAO)spectacleDAO).ajoutDeLaSalle(f);
+		int i = ((SpectacleDAO)spectacleDAO).getId(this,f);
+		for(Artiste j : this.Artistes)
+		{
+			System.out.println("Ajout de l'artiste");
+			((SpectacleDAO)spectacleDAO).ajoutArtisteSpectacle(i,j.find().getId());
+		}
+		this.configuration.ajouterConfiguration(i);
 	}
 }
