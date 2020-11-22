@@ -76,6 +76,7 @@ public class Reservation implements Serializable {
 			date.setDate(date.getDate()+1);
 			cpt++;
 		}while(date.before(this.planningSalle.getDateFinReservation()));
+		date.setDate(date.getDate()-cpt);
 		if(cpt==2)
 			this.prix*=0.95;
 		else if(cpt>=3 && cpt<7)

@@ -45,7 +45,7 @@ public class ReservationSalle extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ReservationSalle frame = new ReservationSalle(new Organisateur());
+					LoginFrame frame = new LoginFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -167,9 +167,9 @@ public class ReservationSalle extends JFrame {
 					Reservation r = new Reservation(0,0,"Payé",0,PS);
 					r.calculerPrixSalle();
 					CreationSpectacle frame = new CreationSpectacle(o,PS);
+					o.reserverSalle(r);
 					contentPane.setVisible(false);
 					frame.setVisible(true);
-					o.reserverSalle(r);
 				}
 				else
 				{

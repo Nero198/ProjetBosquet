@@ -16,6 +16,7 @@ public class Spectacle implements Serializable{
 	private int nbrPlaceParClient;
 	private Configuration configuration;
 	private List<Representation> representations;
+	private int IdSpectacle;
 	public String getTitre() {
 		return titre;
 	}
@@ -46,6 +47,12 @@ public class Spectacle implements Serializable{
 	public void setRepresentations(List<Representation> representations) {
 		this.representations = representations;
 	}
+	public int getIdSpectacle() {
+		return IdSpectacle;
+	}
+	public void setIdSpectacle(int idSpectacle) {
+		IdSpectacle = idSpectacle;
+	}
 	public Spectacle(String titre, List<Artiste> artistes, int nbrPlaceParClient, Configuration configuration,
 			List<Representation> representations) {
 		this.titre = titre;
@@ -56,6 +63,10 @@ public class Spectacle implements Serializable{
 	}
 	public Spectacle() {
 		// TODO Auto-generated constructor stub
+	}
+	public Spectacle(String titre, int idSpectacle) {
+		this.titre = titre;
+		IdSpectacle = idSpectacle;
 	}
 	@Override
 	public String toString() {
