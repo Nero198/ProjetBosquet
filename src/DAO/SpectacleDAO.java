@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import POJO.Artiste;
 import POJO.Client;
@@ -11,6 +14,7 @@ import POJO.Gestionnaire;
 import POJO.Organisateur;
 import POJO.Personne;
 import POJO.Spectacle;
+import POJO.Tuple;
 
 public class SpectacleDAO extends DAO<Spectacle>{
 
@@ -99,5 +103,24 @@ public class SpectacleDAO extends DAO<Spectacle>{
 			e.printStackTrace();
 			return false;
 		}
+	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public List<Tuple> getAll()
+	{
+		List<Tuple> tuples = new ArrayList<Tuple>();
+		try {
+
+			String query = "SELECT * from Spectacle s inner join PlanningSalle p on p.IdSalle=s.IdSalle";
+			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)
+					.executeQuery(query);
+				while(result.next()) {
+					Tuple<Integer,String,Date,Date> tuple = new Tuple(result.getInt("IdSpectacle"), result.getString("Titre"), result.getDate("DateDebut"),
+							result.getDate("DateFin"));
+					tuples.add(tuple);
+				}	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return tuples;
 	}
 }
