@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import POJO.*;
 
@@ -53,8 +55,17 @@ public class RepresentationDAO extends DAO<Representation> {
 
 	@Override
 	public Representation find(int Id) {
-		// TODO Auto-generated method stub
-		return null;
+		Representation r = new Representation();
+		try {
+			ResultSet result = this.connect
+					.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)
+					.executeQuery("SELECT * FROM Representation WHERE IdRepresentation ="+Id  );
+			if(result.first())
+				r = new Representation(result.getDate("Date"),result.getTimestamp("HeureDebut"),result.getTimestamp("HeureFin"),result.getTimestamp("HeureOuverture"),result.getInt("IdRepresentation"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return r;
 	}
 
 	public PlanningSalle getDateReservation(Spectacle s) {
@@ -71,6 +82,22 @@ public class RepresentationDAO extends DAO<Representation> {
 			e.printStackTrace();
 		}
 		return planningSalle;
+	}
+	public List<Representation> getAll(int Id)
+	{
+		List<Representation> listes = new ArrayList<Representation>();
+		try {
+			String query = "SELECT * from Representation where (IdSpectacle = " + Id +")";
+			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)
+					.executeQuery(query);
+			while(result.next()) {
+				Representation tuple = new Representation(result.getDate("Date"),result.getTimestamp("HeureDebut"),result.getTimestamp("HeureFin"),result.getTimestamp("HeureOuverture"),result.getInt("IdRepresentation"));
+				listes.add(tuple);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listes;
 	}
 	
 }

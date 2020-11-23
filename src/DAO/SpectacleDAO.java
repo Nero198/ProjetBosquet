@@ -56,8 +56,17 @@ public class SpectacleDAO extends DAO<Spectacle>{
 
 	@Override
 	public Spectacle find(int Id) {
-		// TODO Auto-generated method stub
-		return null;
+		Spectacle s = new Spectacle();
+		try {
+			ResultSet result = this.connect
+					.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)
+					.executeQuery("SELECT * FROM spectacle WHERE IdSpectacle ="+Id  );
+			if(result.first())
+				s = new Spectacle(result.getString("Titre"),null,result.getInt("NbrePlaceMax"),null,null);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return s;
 	}
 	public boolean ajoutDeLaSalle(int Id)
 	{

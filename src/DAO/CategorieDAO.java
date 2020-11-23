@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import POJO.Categorie;
+import POJO.Representation;
 
 public class CategorieDAO extends DAO<Categorie>{
 	public CategorieDAO(Connection conn) {
@@ -41,8 +44,20 @@ public class CategorieDAO extends DAO<Categorie>{
 
 	@Override
 	public boolean update(Categorie obj) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			
+			String update = "UPDATE Categorie set NombrePlaceDispo = " + obj.getNbrPlaceDispo()+" where IdCategorie = " + obj.getIdCategorie();
+			System.out.println(update);
+			connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeUpdate(update);	
+		
+			return true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	@Override
@@ -64,5 +79,21 @@ public class CategorieDAO extends DAO<Categorie>{
 			e.printStackTrace();
 			return false;
 		}
+	}
+	public List<Categorie> getAll(int Id)
+	{
+		List<Categorie> listes = new ArrayList<Categorie>();
+		try {
+			String query = "SELECT * from Categorie c1 inner join Configuration c2 on c1.IdConfiguration=c2.IdConfiguration where (IdSpectacle = " + Id +")";
+			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)
+					.executeQuery(query);
+			while(result.next()) {
+				Categorie tuple = new Categorie(result.getString("Type"),result.getDouble("Prix"),result.getInt("NombrePlaceDispo"),result.getInt("NombrePlaceMax"),result.getInt("IdCategorie"));
+				listes.add(tuple);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listes;
 	}
 }

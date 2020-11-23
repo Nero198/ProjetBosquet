@@ -18,6 +18,7 @@ import DAO.AbstractDAOFactory;
 import DAO.DAO;
 import DAO.SpectacleDAO;
 import POJO.Artiste;
+import POJO.Client;
 import POJO.Spectacle;
 import POJO.Tuple;
 import javax.swing.JButton;
@@ -38,7 +39,7 @@ public class ChoixSpectacle extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ChoixSpectacle frame = new ChoixSpectacle();
+					ChoixSpectacle frame = new ChoixSpectacle(new Client("Versaevel","Florian","Courcelles","Versaevel.test@hotmail.com","Test2019",10));
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,7 +52,7 @@ public class ChoixSpectacle extends JFrame {
 	 * Create the frame.
 	 */
 	@SuppressWarnings("serial")
-	public ChoixSpectacle() {
+	public ChoixSpectacle(Client c) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -97,7 +98,7 @@ public class ChoixSpectacle extends JFrame {
 		BtnChoisir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int j = (int) table.getModel().getValueAt(table.getSelectedRow(), 3);
-				ChoixRepresentation RepresentationFrame = new ChoixRepresentation(j);
+				ChoixRepresentation RepresentationFrame = new ChoixRepresentation(j,c);
 				RepresentationFrame.setVisible(true);
 			}
 		});

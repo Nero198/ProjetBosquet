@@ -16,6 +16,7 @@ public class Representation implements Serializable {
 	private Date heureDebut;
 	private Date heureFin;
 	private Date heureOuverture;
+	private int IdRepresentation;
 	public Date getDate() {
 		return date;
 	}
@@ -46,6 +47,12 @@ public class Representation implements Serializable {
 	public void setHeureOuverture(Date heureOuverture) {
 		this.heureOuverture = heureOuverture;
 	}
+	public int getIdRepresentation() {
+		return IdRepresentation;
+	}
+	public void setIdRepresentation(int idRepresentation) {
+		IdRepresentation = idRepresentation;
+	}
 	public Representation(Date date, Spectacle spectacle, Date heureDebut, Date heureFin) {
 		this.date = date;
 		this.spectacle = spectacle;
@@ -58,6 +65,15 @@ public class Representation implements Serializable {
 		this.heureDebut = heureDebut;
 		this.heureFin = heureFin;
 		this.heureOuverture = heureOuverture;
+	}
+	public Representation(Date date, Date heureDebut, Date heureFin, Date heureOuverture,int Id) {
+		this.date = date;
+		this.heureDebut = heureDebut;
+		this.heureFin = heureFin;
+		this.heureOuverture = heureOuverture;
+		this.IdRepresentation=Id;
+	}
+	public Representation() {
 	}
 	public boolean verifierHeure()
 	{

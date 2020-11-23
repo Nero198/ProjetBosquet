@@ -14,7 +14,13 @@ public class Categorie implements Serializable {
 	private double prix;
 	private int nbrPlaceDispo;
 	private int nbrPlaceMax;
-	
+	private int IdCategorie;
+	public int getIdCategorie() {
+		return IdCategorie;
+	}
+	public void setIdCategorie(int idCategorie) {
+		IdCategorie = idCategorie;
+	}
 	public String getType() {
 		return type;
 	}
@@ -45,6 +51,13 @@ public class Categorie implements Serializable {
 		this.nbrPlaceDispo = nbrPlaceDispo;
 		this.nbrPlaceMax = nbrPlaceMax;
 	}
+	public Categorie(String type, double prix, int nbrPlaceDispo, int nbrPlaceMax, int idCategorie) {
+		this.type = type;
+		this.prix = prix;
+		this.nbrPlaceDispo = nbrPlaceDispo;
+		this.nbrPlaceMax = nbrPlaceMax;
+		IdCategorie = idCategorie;
+	}
 	public Categorie() {
 	}
 	@Override
@@ -56,5 +69,9 @@ public class Categorie implements Serializable {
 	{
 		categorieDAO.create(this);
 		((CategorieDAO)categorieDAO).ajouterConfiguration(configuration.getId());
+	}
+	public void diminuerNombreDePlace()
+	{
+		categorieDAO.update(this);
 	}
 }
