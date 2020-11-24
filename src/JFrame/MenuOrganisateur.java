@@ -107,7 +107,7 @@ public class MenuOrganisateur extends JFrame {
 		BtnCreerReservation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ReservationSalle r = new ReservationSalle(o);
-				contentPane.setVisible(false);
+				dispose();
 				r.setVisible(true);
 			}
 		});
@@ -120,7 +120,7 @@ public class MenuOrganisateur extends JFrame {
 				if(table.getModel().getValueAt(table.getSelectedRow(),0)!=null)
 				{
 					CreationRepresentation c = new CreationRepresentation(o,new Spectacle(table.getModel().getValueAt(table.getSelectedRow(),0).toString(),(int) table.getModel().getValueAt(table.getSelectedRow(),4)));
-					contentPane.setVisible(false);
+					dispose();
 					c.setVisible(true);
 				}
 				else
@@ -129,7 +129,7 @@ public class MenuOrganisateur extends JFrame {
 					CreationSpectacle c;
 					try {
 						c = new CreationSpectacle(o,new PlanningSalle(dateFormat.parse(table.getModel().getValueAt(table.getSelectedRow(),1).toString()),dateFormat.parse(table.getModel().getValueAt(table.getSelectedRow(),1).toString()),null,(int)table.getModel().getValueAt(table.getSelectedRow(),5)));
-						contentPane.setVisible(false);
+						dispose();
 						c.setVisible(true);
 					} catch (ParseException e1) {
 						e1.printStackTrace();

@@ -18,6 +18,7 @@ import POJO.Commande;
 import POJO.Place;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -150,6 +151,9 @@ public class CreationCommande extends JFrame {
 					commande.setModePayement("SEPA");
 				}
 				commande.creerCommande(cli);
+				MenuClient menuClient = new MenuClient(cli);
+				dispose();
+				menuClient.setVisible(true);
 			}
 		});
 		BtnValider.setBounds(293, 104, 85, 21);

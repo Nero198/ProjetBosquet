@@ -42,9 +42,11 @@ public class MenuClient extends JFrame {
 	 */
 	@SuppressWarnings("serial")
 	public MenuClient(Client c) {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		setTitle("Menu Client");
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -77,6 +79,7 @@ public class MenuClient extends JFrame {
 		BtnReserver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ChoixSpectacle frame= new ChoixSpectacle(c);
+				dispose();
 				frame.setVisible(true);
 			}
 		});

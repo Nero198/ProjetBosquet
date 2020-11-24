@@ -162,10 +162,7 @@ public class CreationRepresentation extends JFrame {
 				Timestamp heureOuverture = new Timestamp(new java.util.Date(d.getYear(),d.getMonth(),d.getDate(),heure3,minute3).getTime());
 				if((0<=heure1&&heure1<=23)&&(0<=heure2&&heure2<=23)&&(0<=heure3&&heure3<=23)&&(0<=minute1&&minute1<=59)&&(0<=minute2&&minute2<=59)&&(0<=minute3&&minute3<=59))
 				{
-					System.out.println("test");
 					Representation r = new Representation((java.sql.Date)d, spectacle, heureDebut, heureFin, heureOuverture);
-					System.out.println("test2");
-					r.verifierHeure();
 					if(r.verifierHeure())
 					{
 						r.ajouterRepresentation();

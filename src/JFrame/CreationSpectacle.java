@@ -276,6 +276,9 @@ public class CreationSpectacle extends JFrame {
 						}
 						s.setConfiguration(config);
 						s.ajouterSpectacle(ps);
+						MenuOrganisateur menuOrganisateur= new MenuOrganisateur(o);
+						dispose();
+						menuOrganisateur.setVisible(true);
 					}
 					else
 						JOptionPane.showMessageDialog(null, "veuillez remplir tous les champs");

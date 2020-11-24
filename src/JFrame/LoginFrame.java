@@ -33,6 +33,7 @@ import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class LoginFrame extends JFrame {
 
 	private JPanel contentPane;
@@ -75,12 +76,10 @@ public class LoginFrame extends JFrame {
 			}
 		});
 	}
-
 	/**
 	 * Create the frame.
 	 */
 	public LoginFrame() {
-		contentPane.repaint();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -107,6 +106,7 @@ public class LoginFrame extends JFrame {
 		
 		BtnIdentifier = new JButton("S'identifier");
 		BtnIdentifier.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				String email = TxtEmail.getText();
 				String motDePasse = PswMDP.getText();
@@ -122,13 +122,13 @@ public class LoginFrame extends JFrame {
 						else if(p instanceof Client)
 						{
 							menuClient = new MenuClient((Client) p);
-							contentPane.setVisible(false);
+							dispose();
 							menuClient.setVisible(true);
 						}
 						else if(p instanceof Organisateur)
 						{
 							creationSpectacle = new MenuOrganisateur((Organisateur) p);
-							contentPane.setVisible(false);
+							dispose();
 							creationSpectacle.setVisible(true);
 						}
 						else
@@ -160,4 +160,5 @@ public class LoginFrame extends JFrame {
 		contentPane.add(BtnEnregistrer);
 		
 	}
+	
 }

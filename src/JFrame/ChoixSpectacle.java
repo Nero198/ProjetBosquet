@@ -92,6 +92,7 @@ public class ChoixSpectacle extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int j = (int) table.getModel().getValueAt(table.getSelectedRow(), 3);
 				ChoixRepresentation RepresentationFrame = new ChoixRepresentation(j, c);
+				dispose();
 				RepresentationFrame.setVisible(true);
 			}
 		});

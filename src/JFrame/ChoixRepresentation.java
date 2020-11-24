@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 import DAO.AbstractDAOFactory;
@@ -23,13 +24,14 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class ChoixRepresentation extends JFrame {
 	AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
 	DAO<Representation> DAO = adf.getRepresentationDAO();
 	private JPanel contentPane;
 	private JTable table;
 	private JButton BtnChoisir;
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -51,7 +53,8 @@ public class ChoixRepresentation extends JFrame {
 	 */
 	@SuppressWarnings("serial")
 	public ChoixRepresentation(int i, Client c) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("Choix representation");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -62,8 +65,28 @@ public class ChoixRepresentation extends JFrame {
 		scrollPane.setBounds(10, 10, 319, 243);
 		contentPane.add(scrollPane);
 
+		
+		BtnChoisir = new JButton("Choisir");
+		BtnChoisir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ChoixCategorie ChoixCategorieFrame = new ChoixCategorie(i,
+						(int) table.getModel().getValueAt(table.getSelectedRow(), 2), c);
+				dispose();
+				ChoixCategorieFrame.setVisible(true);
+			}
+		});
+		BtnChoisir.setBounds(341, 127, 85, 21);
+		contentPane.add(BtnChoisir);
 		List<Representation> listes = ((RepresentationDAO) DAO).getAll(i);
-		if (!listes.isEmpty()) {
+		if (listes.isEmpty()) {
+			MenuClient menuClient = new MenuClient(c);
+			setVisible(false);
+			dispose();
+			JOptionPane.showMessageDialog(menuClient, "Il n'existe pas encore de représentation pour ce spectacle");
+			menuClient.setVisible(true);
+		}
+		else
+		{
 			table = new JTable();
 			table.setModel(new DefaultTableModel(new Object[][] {},
 					new String[] { "Date de la représentation", "Heure du début", "IdRepresentation" }) {
@@ -86,23 +109,5 @@ public class ChoixRepresentation extends JFrame {
 			table.getColumnModel().getColumn(1).setResizable(false);
 			scrollPane.setViewportView(table);
 		}
-		else
-		{
-			JOptionPane.showMessageDialog(null, "Il n'existe pas encore de représentation pour ce spectacle");
-			LoginFrame menuClient = new LoginFrame();
-			contentPane.setVisible(false);
-			menuClient.setVisible(true);
-			menuClient.revalidate();
-		}
-		BtnChoisir = new JButton("Choisir");
-		BtnChoisir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ChoixCategorie ChoixCategorieFrame = new ChoixCategorie(i,
-						(int) table.getModel().getValueAt(table.getSelectedRow(), 2), c);
-				ChoixCategorieFrame.setVisible(true);
-			}
-		});
-		BtnChoisir.setBounds(341, 127, 85, 21);
-		contentPane.add(BtnChoisir);
 	}
 }
