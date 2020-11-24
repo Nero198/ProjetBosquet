@@ -68,7 +68,7 @@ public class CreationSpectacle extends JFrame {
 			public void run() {
 				try {
 					// LoginFrame frame = new LoginFrame();
-					CreationSpectacle frame = new CreationSpectacle(new Organisateur(), new PlanningSalle());
+					LoginFrame frame = new LoginFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

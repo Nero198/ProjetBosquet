@@ -164,7 +164,7 @@ public class ReservationSalle extends JFrame {
 				PlanningSalle PS = new PlanningSalle((java.sql.Date)dateDebut,(java.sql.Date)dateFin,s);
 				if(PS.verifierDisponibilite())
 				{
-					Reservation r = new Reservation(0,0,"Payé",0,PS);
+					Reservation r = new Reservation(0,0,"A Payé",0,PS);
 					r.calculerPrixSalle();
 					CreationSpectacle frame = new CreationSpectacle(o,PS);
 					o.reserverSalle(r);

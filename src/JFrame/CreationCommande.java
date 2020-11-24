@@ -41,7 +41,7 @@ public class CreationCommande extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ChoixSpectacle frame = new ChoixSpectacle(new Client("Versaevel","Florian","Courcelles","Versaevel.test@hotmail.com","Test2019",10));
+					LoginFrame frame = new LoginFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

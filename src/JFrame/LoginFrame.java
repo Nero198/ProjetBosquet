@@ -52,8 +52,13 @@ public class LoginFrame extends JFrame {
 	DAO<Reservation> reservationDAO = adf.getReservationDAO();
 	DAO<Spectacle> spectacleDAO = adf.getSpectacleDAO();
 	DAO<Personne> personneDAO = adf.getPersonneDAO();
+	private JLabel LblEmail;
+	private JLabel LblMDP;
+	private JButton BtnIdentifier;
+	private JButton BtnEnregistrer;
+	private MenuClient menuClient;
+	private MenuOrganisateur creationSpectacle;
 	
-
 	/**
 	 * Launch the application.
 	 */
@@ -62,6 +67,7 @@ public class LoginFrame extends JFrame {
 			public void run() {
 				try {
 					LoginFrame frame = new LoginFrame();
+					
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -74,6 +80,7 @@ public class LoginFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public LoginFrame() {
+		contentPane.repaint();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -86,11 +93,11 @@ public class LoginFrame extends JFrame {
 		contentPane.add(TxtEmail);
 		TxtEmail.setColumns(10);
 		
-		JLabel LblEmail = new JLabel("Email:");
+		LblEmail = new JLabel("Email:");
 		LblEmail.setBounds(62, 58, 45, 13);
 		contentPane.add(LblEmail);
 		
-		JLabel LblMDP = new JLabel("Mot de passe:");
+		LblMDP = new JLabel("Mot de passe:");
 		LblMDP.setBounds(62, 107, 96, 13);
 		contentPane.add(LblMDP);
 		
@@ -98,7 +105,7 @@ public class LoginFrame extends JFrame {
 		PswMDP.setBounds(62, 130, 270, 19);
 		contentPane.add(PswMDP);
 		
-		JButton BtnIdentifier = new JButton("S'identifier");
+		BtnIdentifier = new JButton("S'identifier");
 		BtnIdentifier.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String email = TxtEmail.getText();
@@ -114,12 +121,13 @@ public class LoginFrame extends JFrame {
 						}
 						else if(p instanceof Client)
 						{
-							JOptionPane.showMessageDialog(null, "Client");
+							menuClient = new MenuClient((Client) p);
+							contentPane.setVisible(false);
+							menuClient.setVisible(true);
 						}
 						else if(p instanceof Organisateur)
 						{
-							JOptionPane.showMessageDialog(null, "Organisateur");
-							ReservationSalle creationSpectacle = new ReservationSalle((Organisateur) p);
+							creationSpectacle = new MenuOrganisateur((Organisateur) p);
 							contentPane.setVisible(false);
 							creationSpectacle.setVisible(true);
 						}
@@ -141,7 +149,7 @@ public class LoginFrame extends JFrame {
 		BtnIdentifier.setBounds(62, 183, 130, 21);
 		contentPane.add(BtnIdentifier);
 		
-		JButton BtnEnregistrer = new JButton("S'enregistrer");
+		BtnEnregistrer = new JButton("S'enregistrer");
 		BtnEnregistrer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EnregistrerFrame frame = new EnregistrerFrame();

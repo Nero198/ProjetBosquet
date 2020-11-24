@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
@@ -36,7 +37,7 @@ public class ChoixRepresentation extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ChoixSpectacle frame = new ChoixSpectacle(new Client("Versaevel","Florian","Courcelles","Versaevel.test@hotmail.com","Test2019",10));
+					LoginFrame frame = new LoginFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,51 +50,55 @@ public class ChoixRepresentation extends JFrame {
 	 * Create the frame.
 	 */
 	@SuppressWarnings("serial")
-	public ChoixRepresentation(int i,Client c) {
+	public ChoixRepresentation(int i, Client c) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 10, 319, 243);
 		contentPane.add(scrollPane);
-		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Date de la représentation", "Heure du début","IdRepresentation"
+
+		List<Representation> listes = ((RepresentationDAO) DAO).getAll(i);
+		if (!listes.isEmpty()) {
+			table = new JTable();
+			table.setModel(new DefaultTableModel(new Object[][] {},
+					new String[] { "Date de la représentation", "Heure du début", "IdRepresentation" }) {
+				boolean[] columnEditables = new boolean[] { false, false };
+
+				public boolean isCellEditable(int row, int column) {
+					return columnEditables[column];
+				}
+			});
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat dateFormat2 = new SimpleDateFormat("HH:mm:ss");
+			for (var j : listes) {
+				DefaultTableModel model = (DefaultTableModel) table.getModel();
+				Object[] row = new Object[] { dateFormat.format(j.getDate()), dateFormat2.format(j.getHeureDebut()),
+						j.getIdRepresentation() };
+				model.addRow(row);
+
 			}
-		) {
-			boolean[] columnEditables = new boolean[] {
-				false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		SimpleDateFormat dateFormat2 = new SimpleDateFormat("HH:mm:ss");
-		List<Representation> listes= ((RepresentationDAO)DAO).getAll(i);
-		for(var j : listes)
-		{
-			DefaultTableModel model = (DefaultTableModel) table.getModel();
-			Object[] row = new Object[] {dateFormat.format(j.getDate()),dateFormat2.format(j.getHeureDebut()),j.getIdRepresentation()};
-			model.addRow(row);
-			
+			table.removeColumn(table.getColumnModel().getColumn(2));
+			table.getColumnModel().getColumn(1).setResizable(false);
+			scrollPane.setViewportView(table);
 		}
-		table.removeColumn(table.getColumnModel().getColumn(2));
-		table.getColumnModel().getColumn(1).setResizable(false);
-		scrollPane.setViewportView(table);
-		
+		else
+		{
+			JOptionPane.showMessageDialog(null, "Il n'existe pas encore de représentation pour ce spectacle");
+			LoginFrame menuClient = new LoginFrame();
+			contentPane.setVisible(false);
+			menuClient.setVisible(true);
+			menuClient.revalidate();
+		}
 		BtnChoisir = new JButton("Choisir");
 		BtnChoisir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ChoixCategorie ChoixCategorieFrame = new ChoixCategorie(i,(int) table.getModel().getValueAt(table.getSelectedRow(),2),c);
+				ChoixCategorie ChoixCategorieFrame = new ChoixCategorie(i,
+						(int) table.getModel().getValueAt(table.getSelectedRow(), 2), c);
 				ChoixCategorieFrame.setVisible(true);
 			}
 		});

@@ -70,8 +70,7 @@ public class Spectacle implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Spectacle [titre=" + titre + ", Artistes=" + Artistes + ", nbrPlaceParClient=" + nbrPlaceParClient
-				+ ", configuration=" + configuration + ", representations=" + representations + "]";
+		return titre;
 	}
 	public void ajouterSpectacle(PlanningSalle ps)
 	{

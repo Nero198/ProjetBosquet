@@ -96,7 +96,9 @@ public class EnregistrerFrame extends JFrame {
 					@SuppressWarnings("deprecation")
 					Client p = new Client(TxtNom.getText(),TxtPrenom.getText(),TxtAdresse.getText(),TxtEmail.getText(),PswMotDePasse.getText());
 					clientDAO.create(p);
-					JOptionPane.showMessageDialog(null, "Client");
+					MenuClient menuClient = new MenuClient((Client) p);
+					contentPane.setVisible(false);
+					menuClient.setVisible(true);
 				}	
 				else if(RadioArtiste.isSelected())
 				{
@@ -109,6 +111,9 @@ public class EnregistrerFrame extends JFrame {
 					@SuppressWarnings("deprecation")
 					Organisateur p = new Organisateur(TxtNom.getText(),TxtPrenom.getText(),TxtAdresse.getText(),TxtEmail.getText(),PswMotDePasse.getText());
 					organisateurDAO.create(p);
+					MenuOrganisateur creationSpectacle = new MenuOrganisateur((Organisateur) p);
+					contentPane.setVisible(false);
+					creationSpectacle.setVisible(true);
 				}
 			}
 		});

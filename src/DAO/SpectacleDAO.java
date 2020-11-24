@@ -132,4 +132,5 @@ public class SpectacleDAO extends DAO<Spectacle>{
 		}
 		return tuples;
 	}
+	
 }

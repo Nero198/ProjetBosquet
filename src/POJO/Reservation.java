@@ -11,21 +11,21 @@ public class Reservation implements Serializable {
 	AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
 	DAO<Reservation> reservationDAO = adf.getReservationDAO();
 	private static final long serialVersionUID = 7982945450646152881L;
-	private int accompte;
-	private int solde;
+	private double accompte;
+	private double solde;
 	private String statut;
-	private int prix;
+	private double prix;
 	private PlanningSalle planningSalle;
-	public int getAccompte() {
+	public double getAccompte() {
 		return accompte;
 	}
-	public void setAccompte(int accompte) {
+	public void setAccompte(double accompte) {
 		this.accompte = accompte;
 	}
-	public int getSolde() {
+	public double getSolde() {
 		return solde;
 	}
-	public void setSolde(int solde) {
+	public void setSolde(double solde) {
 		this.solde = solde;
 	}
 	public String getStatut() {
@@ -34,10 +34,10 @@ public class Reservation implements Serializable {
 	public void setStatut(String statut) {
 		this.statut = statut;
 	}
-	public int getPrix() {
+	public double getPrix() {
 		return prix;
 	}
-	public void setPrix(int prix) {
+	public void setPrix(double prix) {
 		this.prix = prix;
 	}
 	public PlanningSalle getPlanningSalle() {
@@ -46,7 +46,7 @@ public class Reservation implements Serializable {
 	public void setPlanningSale(PlanningSalle planningSalle) {
 		this.planningSalle = planningSalle;
 	}
-	public Reservation(int accompte, int solde, String statut, int prix, PlanningSalle planningSalle) {
+	public Reservation(double accompte, double solde, String statut, double prix, PlanningSalle planningSalle) {
 		this.accompte = accompte;
 		this.solde = solde;
 		this.statut = statut;

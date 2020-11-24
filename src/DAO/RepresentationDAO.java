@@ -76,8 +76,7 @@ public class RepresentationDAO extends DAO<Representation> {
 							"SELECT * FROM PlanningSalle p inner join Spectacle s on p.IdSalle = s.IdSalle WHERE IdSpectacle = '"
 									+ s.getIdSpectacle() + "';");
 			if (result.first())
-				;
-			planningSalle = new PlanningSalle(result.getDate("DateDebut"), result.getDate("DateFin"), null);
+				planningSalle = new PlanningSalle(result.getDate("DateDebut"), result.getDate("DateFin"), null);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

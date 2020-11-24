@@ -12,6 +12,7 @@ import com.toedter.calendar.JDateChooser;
 import DAO.AbstractDAOFactory;
 import DAO.DAO;
 import DAO.RepresentationDAO;
+import POJO.Organisateur;
 import POJO.PlanningSalle;
 import POJO.Representation;
 import POJO.Spectacle;
@@ -47,7 +48,7 @@ public class CreationRepresentation extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CreationRepresentation frame = new CreationRepresentation(new Spectacle("Test25", 10));
+					LoginFrame frame = new LoginFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -59,7 +60,7 @@ public class CreationRepresentation extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CreationRepresentation(Spectacle spectacle) {
+	public CreationRepresentation(Organisateur o,Spectacle spectacle) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
