@@ -1,15 +1,11 @@
 package JFrame;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.util.Date;
 import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JList;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -17,14 +13,15 @@ import javax.swing.table.DefaultTableModel;
 import DAO.AbstractDAOFactory;
 import DAO.DAO;
 import DAO.SpectacleDAO;
-import POJO.Artiste;
+import Other.Tuple;
 import POJO.Client;
 import POJO.Spectacle;
-import POJO.Tuple;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class ChoixSpectacle extends JFrame {
 	AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
 	DAO<Spectacle> DAO = adf.getSpectacleDAO();
@@ -51,7 +48,6 @@ public class ChoixSpectacle extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	@SuppressWarnings("serial")
 	public ChoixSpectacle(Client c) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -86,6 +82,7 @@ public class ChoixSpectacle extends JFrame {
 
 			}
 			scrollPane.setViewportView(table);
+			
 		}
 		BtnChoisir = new JButton("Choisir");
 		BtnChoisir.addActionListener(new ActionListener() {

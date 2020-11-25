@@ -1,6 +1,5 @@
 package JFrame;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -11,7 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 import DAO.AbstractDAOFactory;
@@ -19,7 +17,6 @@ import DAO.DAO;
 import DAO.RepresentationDAO;
 import POJO.Client;
 import POJO.Representation;
-import POJO.Spectacle;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -51,7 +48,6 @@ public class ChoixRepresentation extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	@SuppressWarnings("serial")
 	public ChoixRepresentation(int i, Client c) {
 		setTitle("Choix representation");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -77,13 +73,21 @@ public class ChoixRepresentation extends JFrame {
 		});
 		BtnChoisir.setBounds(341, 127, 85, 21);
 		contentPane.add(BtnChoisir);
+		
+		JButton BtnMenu = new JButton("Menu");
+		BtnMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MenuClient menuClient = new MenuClient(c);
+				dispose();
+				menuClient.setVisible(true);
+			}
+		});
+		BtnMenu.setBounds(10, 10, 414, 243);
 		List<Representation> listes = ((RepresentationDAO) DAO).getAll(i);
 		if (listes.isEmpty()) {
-			MenuClient menuClient = new MenuClient(c);
-			setVisible(false);
-			dispose();
-			JOptionPane.showMessageDialog(menuClient, "Il n'existe pas encore de représentation pour ce spectacle");
-			menuClient.setVisible(true);
+			JOptionPane.showMessageDialog(null, "Il n'existe pas encore de représentation pour ce spectacle");
+			contentPane.removeAll();
+			contentPane.add(BtnMenu);
 		}
 		else
 		{

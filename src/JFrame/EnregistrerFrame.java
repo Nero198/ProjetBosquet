@@ -1,6 +1,5 @@
 package JFrame;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -16,11 +15,11 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class EnregistrerFrame extends JFrame {
 
 	private JPanel contentPane;

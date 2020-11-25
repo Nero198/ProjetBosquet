@@ -1,4 +1,4 @@
-package POJO;
+package Other;
 
 import java.awt.Color;
 import java.util.Date;

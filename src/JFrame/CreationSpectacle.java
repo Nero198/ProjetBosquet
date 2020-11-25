@@ -1,6 +1,5 @@
 package JFrame;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,20 +16,15 @@ import DAO.DAO;
 import POJO.*;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.JScrollBar;
 import javax.swing.JList;
 import javax.swing.JButton;
-import javax.swing.SwingConstants;
-import javax.swing.ListModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
-import javax.swing.JScrollPane;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
 import javax.swing.JCheckBox;
 
+@SuppressWarnings("serial")
 public class CreationSpectacle extends JFrame {
 
 	private JPanel contentPane;
@@ -223,7 +217,16 @@ public class CreationSpectacle extends JFrame {
 		TxtPlaceMax.setBounds(153, 78, 33, 21);
 		contentPane.add(TxtPlaceMax);
 		TxtPlaceMax.setColumns(10);
-
+		
+		JButton BtnMenu = new JButton("Menu");
+		BtnMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MenuOrganisateur menuClient = new MenuOrganisateur(o);
+				dispose();
+				menuClient.setVisible(true);
+			}
+		});
+		
 		JButton BtnAjouter = new JButton("Ajouter");
 		BtnAjouter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -276,9 +279,7 @@ public class CreationSpectacle extends JFrame {
 						}
 						s.setConfiguration(config);
 						s.ajouterSpectacle(ps);
-						MenuOrganisateur menuOrganisateur= new MenuOrganisateur(o);
-						dispose();
-						menuOrganisateur.setVisible(true);
+						contentPane.add(BtnMenu);
 					}
 					else
 						JOptionPane.showMessageDialog(null, "veuillez remplir tous les champs");

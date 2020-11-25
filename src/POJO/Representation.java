@@ -77,10 +77,22 @@ public class Representation implements Serializable {
 	}
 	public boolean verifierHeure()
 	{
+		
+		PlanningSalle ps = ((RepresentationDAO)representationDAO).getDateReservation(this.getSpectacle());
 		if(this.heureOuverture.before(this.heureDebut))
 		{
 			if(this.heureDebut.before(this.heureFin))
-				return true;
+			{
+				if(this.heureOuverture.after(ps.getDateDebutReservation()))
+				{
+					if(this.heureFin.before(ps.getDateFinReservation()))
+						return true;
+					else
+						return false;
+				}
+				else
+					return false;
+			}
 			else
 				return false;
 		}

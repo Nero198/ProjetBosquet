@@ -3,8 +3,9 @@ package DAO;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-import POJO.Categorie;
 import POJO.Client;
 import POJO.Commande;
 
@@ -65,5 +66,21 @@ public class CommandeDAO extends DAO<Commande> {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	public List<Commande> getAll(int id)
+	{
+		List<Commande> listes = new ArrayList<Commande>();
+		try {
+			String query = "SELECT * from Commande where (IdPersonne = " + id +")";
+			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)
+					.executeQuery(query);
+			while(result.next()) {
+				Commande tuple = new Commande(result.getString("ModePayement"),result.getString("ModeLivraison"),result.getDouble("CoutTotal"),null);
+				listes.add(tuple);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listes;
 	}
 }

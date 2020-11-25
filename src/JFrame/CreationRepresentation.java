@@ -1,7 +1,5 @@
 package JFrame;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -17,19 +15,16 @@ import POJO.PlanningSalle;
 import POJO.Representation;
 import POJO.Spectacle;
 
-import javax.swing.JSpinner;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.sql.Date;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class CreationRepresentation extends JFrame {
 
 	private JPanel contentPane;
@@ -140,12 +135,22 @@ public class CreationRepresentation extends JFrame {
 		TxtTitre.setBounds(270, 73, 122, 13);
 		TxtTitre.setText(spectacle.getTitre());
 		contentPane.add(TxtTitre);
-
+		
+		JButton BtnMenu = new JButton("Menu");
+		BtnMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MenuOrganisateur menuClient = new MenuOrganisateur(o);
+				dispose();
+				menuClient.setVisible(true);
+			}
+		});
+		BtnMenu.setBounds(10, 10, 414, 243);
+		
 		JButton BtnValider = new JButton("Valider");
 		BtnValider.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
-				SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+				
 				Date d = new java.sql.Date(DateRepresentation.getDate().getTime());
 				int heure1 = Integer.parseInt(TxtHeureDebut.getText());
 				int minute1 = Integer.parseInt(TxtMinuteDebut.getText());
@@ -166,7 +171,11 @@ public class CreationRepresentation extends JFrame {
 					if(r.verifierHeure())
 					{
 						r.ajouterRepresentation();
+						contentPane.add(BtnMenu);
+						JOptionPane.showMessageDialog(null, "Ajout avec succès");
 					}
+					else
+						JOptionPane.showMessageDialog(null, "Les heures choisies sont en dehors de la réservation de la salle");
 				}
 				else
 				{

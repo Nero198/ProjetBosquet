@@ -1,6 +1,5 @@
 package JFrame;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -12,21 +11,21 @@ import com.toedter.calendar.JCalendar;
 import DAO.AbstractDAOFactory;
 import DAO.DAO;
 import DAO.PlanningSalleDAO;
+import Other.RangeEvaluator;
 import POJO.*;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.sql.Date;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class ReservationSalle extends JFrame {
 	AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
 	DAO<PlanningSalle> planningSalleDAO = adf.getPlanningSalleDAO();
@@ -57,6 +56,7 @@ public class ReservationSalle extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	@SuppressWarnings("deprecation")
 	public ReservationSalle(Organisateur o) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);

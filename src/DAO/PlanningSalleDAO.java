@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,15 +20,18 @@ public class PlanningSalleDAO extends DAO<PlanningSalle>{
 		// TODO Auto-generated constructor stub
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean create(PlanningSalle obj) {
 		try {
 			PreparedStatement ps = null;
 			String insertion2 = "INSERT INTO PlanningSalle (DateDebut,DateFin) VALUES (?,?)";
 			ps = connect.prepareStatement(insertion2);
+			Timestamp dateDebut = new Timestamp(obj.getDateDebutReservation().getYear(),obj.getDateDebutReservation().getMonth(),obj.getDateDebutReservation().getDate(),12,0,0,0);
+			Timestamp dateFin = new Timestamp(obj.getDateFinReservation().getYear(),obj.getDateFinReservation().getMonth(),obj.getDateFinReservation().getDate(),12,0,0,0);
 			connect.createStatement();
-			ps.setDate(1, (java.sql.Date)obj.getDateDebutReservation());
-			ps.setDate(2, (java.sql.Date)obj.getDateFinReservation());
+			ps.setTimestamp(1, dateDebut);
+			ps.setTimestamp(2, dateFin);
 			ps.executeUpdate();
 			System.out.print(insertion2);
 			return true;

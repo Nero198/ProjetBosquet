@@ -1,10 +1,8 @@
 package JFrame;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -15,7 +13,6 @@ import POJO.Organisateur;
 import POJO.PlanningSalle;
 import POJO.Reservation;
 import POJO.Spectacle;
-import POJO.Tuple;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -24,12 +21,11 @@ import javax.swing.table.DefaultTableModel;
 import DAO.AbstractDAOFactory;
 import DAO.DAO;
 import DAO.ReservationDAO;
-import DAO.SpectacleDAO;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.util.Date;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class MenuOrganisateur extends JFrame {
 	AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
 	DAO<Reservation> DAO = adf.getReservationDAO();
@@ -58,7 +54,6 @@ public class MenuOrganisateur extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	@SuppressWarnings("serial")
 	public MenuOrganisateur(Organisateur o) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -111,7 +106,7 @@ public class MenuOrganisateur extends JFrame {
 				r.setVisible(true);
 			}
 		});
-		BtnCreerReservation.setBounds(304, 31, 102, 21);
+		BtnCreerReservation.setBounds(304, 41, 102, 21);
 		contentPane.add(BtnCreerReservation);
 		
 		BtnCreerRepresentation = new JButton("Ajouter une repr\u00E9sentation");
@@ -139,6 +134,17 @@ public class MenuOrganisateur extends JFrame {
 		});
 		BtnCreerRepresentation.setBounds(281, 122, 155, 21);
 		contentPane.add(BtnCreerRepresentation);
+		
+		JButton BtnDeco = new JButton("Quitter");
+		BtnDeco.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				LoginFrame f = new LoginFrame();
+				dispose();
+				f.setVisible(true);
+			}
+		});
+		BtnDeco.setBounds(341, 10, 85, 21);
+		contentPane.add(BtnDeco);
 		
 		BtnPayer = new JButton("Payer");
 		BtnPayer.setBounds(321, 215, 85, 21);

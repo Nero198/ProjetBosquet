@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import Other.Tuple;
 import POJO.Artiste;
 import POJO.Client;
 import POJO.Gestionnaire;
 import POJO.Organisateur;
 import POJO.Personne;
 import POJO.Spectacle;
-import POJO.Tuple;
 
 public class SpectacleDAO extends DAO<Spectacle>{
 

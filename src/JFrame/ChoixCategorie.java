@@ -1,6 +1,5 @@
 package JFrame;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.util.List;
 
@@ -19,7 +18,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
-import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -28,6 +26,7 @@ import javax.swing.JSpinner;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class ChoixCategorie extends JFrame {
 	AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
 	DAO<Categorie> DAOCategorie = adf.getCatetogieDAO();
@@ -58,7 +57,6 @@ public class ChoixCategorie extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	@SuppressWarnings("serial")
 	public ChoixCategorie(int idSpectacle, int IdRepresentation,Client cli) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);

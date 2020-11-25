@@ -1,9 +1,7 @@
 package JFrame;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
 
@@ -18,13 +16,13 @@ import POJO.Commande;
 import POJO.Place;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class CreationCommande extends JFrame {
 
 	private JPanel contentPane;
@@ -121,6 +119,16 @@ public class CreationCommande extends JFrame {
 			contentPane.add(RdbSepa);
 		}
 		
+		JButton BtnMenu = new JButton("Menu");
+		BtnMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MenuClient menuClient = new MenuClient(cli);
+				dispose();
+				menuClient.setVisible(true);
+			}
+		});
+		BtnMenu.setBounds(10, 10, 414, 243);
+		
 		JButton BtnValider = new JButton("Valider");
 		BtnValider.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -151,11 +159,10 @@ public class CreationCommande extends JFrame {
 					commande.setModePayement("SEPA");
 				}
 				commande.creerCommande(cli);
-				MenuClient menuClient = new MenuClient(cli);
-				dispose();
-				menuClient.setVisible(true);
+				contentPane.add(BtnMenu);
 			}
 		});
+		
 		BtnValider.setBounds(293, 104, 85, 21);
 		contentPane.add(BtnValider);
 		
