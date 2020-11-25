@@ -7,10 +7,8 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import POJO.Artiste;
 import POJO.PlanningSalle;
 
 public class PlanningSalleDAO extends DAO<PlanningSalle>{

@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import POJO.Artiste;
 import POJO.Client;
 
 public class ClientDAO extends DAO<Client> {

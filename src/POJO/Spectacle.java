@@ -61,6 +61,11 @@ public class Spectacle implements Serializable{
 		this.configuration = configuration;
 		this.representations = representations;
 	}
+	
+	public Spectacle(String titre, List<Representation> representations) {
+		this.titre = titre;
+		this.representations = representations;
+	}
 	public Spectacle() {
 		// TODO Auto-generated constructor stub
 	}

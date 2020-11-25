@@ -73,6 +73,13 @@ public class Representation implements Serializable {
 		this.heureOuverture = heureOuverture;
 		this.IdRepresentation=Id;
 	}
+	public Representation(Date date, Spectacle spectacle, Date heureDebut, Date heureFin, int idRepresentation) {
+		this.date = date;
+		this.spectacle = spectacle;
+		this.heureDebut = heureDebut;
+		this.heureFin = heureFin;
+		IdRepresentation = idRepresentation;
+	}
 	public Representation() {
 	}
 	public boolean verifierHeure()

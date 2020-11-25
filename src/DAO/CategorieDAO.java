@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import POJO.Categorie;
-import POJO.Representation;
 
 public class CategorieDAO extends DAO<Categorie>{
 	public CategorieDAO(Connection conn) {

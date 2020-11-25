@@ -96,5 +96,32 @@ public class RepresentationDAO extends DAO<Representation> {
 		}
 		return listes;
 	}
+	public List<Representation> findAll(int Id) {
+		List<Representation> liste2 = new ArrayList<>();
+		
+		try {
+			
+			ResultSet result2 = this.connect
+					.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery(
+							"SELECT * FROM ArtisteSpectacle a inner join Spectacle s on a.IdSpectacle=s.IdSpectacle inner Join Representation r on r.IdSpectacle=s.IdSpectacle inner join ArtisteSpectacle a on a.IdSpectacle= s.IdSpectacle where IdArtiste = "+ Id);
+			
+			while (result2.next()) {
+				boolean exist = false;
+				Representation r = new Representation(result2.getDate("Date"),new Spectacle(result2.getString("Titre"),result2.getInt("IdSpectacle")),result2.getTimestamp("HeureDebut"),result2.getTimestamp("HeureFin"),result2.getInt("IdRepresentation"));
+				for(var i : liste2)
+				{
+					if(i.getIdRepresentation()==result2.getInt("IdRepresentation"))
+						exist = true;
+				}
+				if(exist == false)
+					liste2.add(r);
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return liste2;
+	}
 	
 }

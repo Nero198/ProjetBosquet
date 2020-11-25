@@ -33,18 +33,6 @@ public class CreationSpectacle extends JFrame {
 	private List<Artiste> Artistes = new ArrayList<Artiste>();
 	AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
 	DAO<Artiste> artisteDAO = adf.getArtisteDAO();
-	DAO<Client> clientDAO = adf.getClientDAO();
-	DAO<Categorie> categorieDAO = adf.getCatetogieDAO();
-	DAO<Commande> commandeDAO = adf.getCommandeDAO();
-	DAO<Configuration> configurationDAO = adf.getConfigurationDAO();
-	DAO<Gestionnaire> gestionnaireDAO = adf.getGestionnaireDAO();
-	DAO<Organisateur> organisateurDAO = adf.getOrganisateurDAO();
-	DAO<Place> placeDAO = adf.getPlaceDAO();
-	DAO<PlanningSalle> planningSalleDAO = adf.getPlanningSalleDAO();
-	DAO<Representation> representationDAO = adf.getRepresentationDAO();
-	DAO<Reservation> reservationDAO = adf.getReservationDAO();
-	DAO<Spectacle> spectacleDAO = adf.getSpectacleDAO();
-	DAO<Personne> personneDAO = adf.getPersonneDAO();
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JTextField TxtBronze;
 	private JTextField TxtArgent;
