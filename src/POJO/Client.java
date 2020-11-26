@@ -3,8 +3,13 @@ package POJO;
 import java.io.Serializable;
 import java.util.*;
 
+import DAO.AbstractDAOFactory;
+import DAO.ClientDAO;
+import DAO.DAO;
+
 public class Client extends Personne implements Serializable{
-	
+	AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
+	DAO<Client> clientDAO = adf.getClientDAO();
 	private static final long serialVersionUID = -369474509108260321L;
 	private List<Commande> commandes;
 	public List<Commande> getCommandes() {
@@ -41,5 +46,24 @@ public class Client extends Personne implements Serializable{
 		super(nom, prenom, adresse, email, password, id);
 		// TODO Auto-generated constructor stub
 	}
-	
+	public boolean ajouterPlace(Place p)
+	{
+		p.ajouterPlace();
+		return true;
+	}
+	public boolean creerCommande(Commande c)
+	{
+		c.creerCommande(this);
+		return true;
+	}
+	public boolean creer()
+	{
+		clientDAO.create(this);
+		return true;
+	}
+	public void getCommande()
+	{
+		List<Commande> commandes = ((ClientDAO) clientDAO).getAll(this.getId());
+		this.setCommandes(commandes);
+	}
 }

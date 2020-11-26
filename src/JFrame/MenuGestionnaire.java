@@ -4,7 +4,6 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,17 +13,11 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import DAO.AbstractDAOFactory;
-import DAO.DAO;
-import DAO.PlanningSalleDAO;
 import POJO.Gestionnaire;
-import POJO.PlanningSalle;
 
 @SuppressWarnings("serial")
 public class MenuGestionnaire extends JFrame {
 
-	AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
-	DAO<PlanningSalle> DAO = adf.getPlanningSalleDAO();
 	private JPanel contentPane;
 	private JTable table;
 	private JButton BtnLogin;
@@ -58,7 +51,7 @@ public class MenuGestionnaire extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 10, 416, 211);
 		contentPane.add(scrollPane);
-		List<PlanningSalle> entry = ((PlanningSalleDAO) DAO).find();
+		g.getAllPlanningSalle();
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -74,7 +67,7 @@ public class MenuGestionnaire extends JFrame {
 				return columnEditables[column];
 			}
 		});
-		for (var i : entry) {
+		for (var i : g.getPlanningSalle()) {
 			SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy 12:00");
 			DefaultTableModel model = (DefaultTableModel) table.getModel();
 			Object[] row = new Object[] { s.format(i.getDateDebutReservation()),s.format(i.getDateFinReservation())};

@@ -3,8 +3,13 @@ package DAO;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import POJO.Organisateur;
+import POJO.PlanningSalle;
+import POJO.Reservation;
+import POJO.Spectacle;
 
 public class OrganisateurDAO extends DAO<Organisateur> {
 	public OrganisateurDAO(Connection conn) {
@@ -105,5 +110,42 @@ public class OrganisateurDAO extends DAO<Organisateur> {
 			e.printStackTrace();
 		}
 		return organisateur;
+	}
+	public List<Reservation> findAll(int Id) {
+		List<Reservation> liste = new ArrayList<>();
+		List<Spectacle> liste2 = new ArrayList<>();
+		List<Spectacle> liste3 = new ArrayList<>();
+		try {
+
+			ResultSet result2 = this.connect
+					.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery(
+							"SELECT * FROM Reservation r inner Join PlanningSalle p on r.IdSalle=p.IdSalle inner join Spectacle s on p.IdSalle = s.IdSalle WHERE IdOrganisateur ="
+									+ Id);
+			while (result2.next()) {
+				liste2 = new ArrayList<>();
+				Reservation r = new Reservation(result2.getInt("Accompte"), result2.getInt("Solde"),
+						result2.getString("Statut"), result2.getInt("Prix"),
+						new PlanningSalle(result2.getTimestamp("DateDebut"), result2.getTimestamp("DateFin"), liste2,result2.getInt("IdSalle")));
+					r.getPlanningSalle().getSpectacle().add(new Spectacle(result2.getString("Titre"),result2.getInt("IdSpectacle")));
+				
+				liste.add(r);
+			}
+			ResultSet result = this.connect
+					.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery(
+							"SELECT * FROM Reservation r inner Join PlanningSalle p on r.IdSalle=p.IdSalle left join Spectacle s on p.IdSalle = s.IdSalle WHERE (IdOrganisateur ="
+									+ Id+" AND s.IdSalle is NULL)");
+			while (result.next()) {
+				liste2 = new ArrayList<>();
+				Reservation r = new Reservation(result.getInt("Accompte"), result.getInt("Solde"),
+						result.getString("Statut"), result.getInt("Prix"),
+						new PlanningSalle(result.getTimestamp("DateDebut"), result.getTimestamp("DateFin"), liste2,result.getInt("IdSalle")));
+					r.getPlanningSalle().getSpectacle().add(new Spectacle());
+				
+				liste.add(r);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return liste;
 	}
 }

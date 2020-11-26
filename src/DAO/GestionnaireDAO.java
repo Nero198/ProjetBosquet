@@ -3,7 +3,11 @@ package DAO;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import POJO.Gestionnaire;
+import POJO.PlanningSalle;
 
 public class GestionnaireDAO extends DAO<Gestionnaire> {
 
@@ -103,5 +107,22 @@ public class GestionnaireDAO extends DAO<Gestionnaire> {
 			e.printStackTrace();
 		}
 		return gestionnaire;
+	}
+	public List<PlanningSalle> find()
+	{
+		List<PlanningSalle> PlanningSalle = new ArrayList<PlanningSalle>();
+		try {
+
+			String query = "SELECT * from PlanningSalle";
+			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)
+					.executeQuery(query);
+				while(result.next()) {
+					PlanningSalle PS = new PlanningSalle(result.getDate("DateDebut"),result.getDate("DateFin"),null,result.getInt("IdSalle"));
+					PlanningSalle.add(PS);
+				}	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return PlanningSalle;
 	}
 }

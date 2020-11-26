@@ -3,7 +3,6 @@ package JFrame;
 import java.awt.EventQueue;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -11,24 +10,18 @@ import javax.swing.border.EmptyBorder;
 
 import POJO.Organisateur;
 import POJO.PlanningSalle;
-import POJO.Reservation;
 import POJO.Spectacle;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import DAO.AbstractDAOFactory;
-import DAO.DAO;
-import DAO.ReservationDAO;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class MenuOrganisateur extends JFrame {
-	AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
-	DAO<Reservation> DAO = adf.getReservationDAO();
 	private JPanel contentPane;
 	private JTable table;
 	private JButton BtnCreerReservation;
@@ -82,8 +75,8 @@ public class MenuOrganisateur extends JFrame {
 			}
 		});
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		List<Reservation> entry = ((ReservationDAO)DAO).findAll(o.getId());
-		for(var i : entry)
+		o.getReservation();
+		for(var i : o.getReservations())
 		{
 			DefaultTableModel model = (DefaultTableModel) table.getModel();
 			for(var j : i.getPlanningSalle().getSpectacle())

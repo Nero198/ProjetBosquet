@@ -158,7 +158,7 @@ public class CreationCommande extends JFrame {
 				{
 					commande.setModePayement("SEPA");
 				}
-				commande.creerCommande(cli);
+				cli.creerCommande(commande);
 				contentPane.add(BtnMenu);
 			}
 		});

@@ -1,7 +1,6 @@
 package POJO;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 import DAO.*;
@@ -98,7 +97,6 @@ public class PlanningSalle implements Serializable{
 	}
 	public int find()
 	{
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		var liste = ((PlanningSalleDAO) planningSalleDAO).find();
 		int id = 0;
 		for(var i : liste)

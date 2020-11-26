@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import DAO.AbstractDAOFactory;
 import DAO.DAO;
-import DAO.OrganisateurDAO;
-import DAO.PersonneDAO;
 import DAO.ReservationDAO;
 public class Reservation implements Serializable {
 	AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
@@ -57,6 +55,7 @@ public class Reservation implements Serializable {
 	public Reservation() {
 		// TODO Auto-generated constructor stub
 	}
+	@SuppressWarnings("deprecation")
 	public void calculerPrixSalle()
 	{
 		this.prix=this.accompte;

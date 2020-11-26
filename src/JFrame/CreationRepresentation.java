@@ -170,7 +170,7 @@ public class CreationRepresentation extends JFrame {
 					Representation r = new Representation((java.sql.Date)d, spectacle, heureDebut, heureFin, heureOuverture);
 					if(r.verifierHeure())
 					{
-						r.ajouterRepresentation();
+						o.ajouterRepresentation(r);
 						contentPane.add(BtnMenu);
 						JOptionPane.showMessageDialog(null, "Ajout avec succès");
 					}

@@ -119,7 +119,7 @@ public class ChoixCategorie extends JFrame {
 								(int) table.getModel().getValueAt(table.getSelectedRow(), 2)-(int) SpinAReserver.getValue(),
 								(int) table.getModel().getValueAt(table.getSelectedRow(), 3),
 								(int) table.getModel().getValueAt(table.getSelectedRow(), 4));
-						p.ajouterPlace();
+						cli.ajouterPlace(p);
 						c.diminuerNombreDePlace();
 						
 					} else {

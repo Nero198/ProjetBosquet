@@ -32,4 +32,9 @@ public class Artiste extends Personne implements Serializable{
 	{
 		return ((ArtisteDAO)artisteDAO).find(this.getEmail());
 	}
+	public boolean creer()
+	{
+		artisteDAO.create(this);
+		return true;
+	}
 }

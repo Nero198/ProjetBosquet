@@ -6,8 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import DAO.AbstractDAOFactory;
-import DAO.DAO;
 import POJO.*;
 
 import javax.swing.JRadioButton;
@@ -29,10 +27,6 @@ public class EnregistrerFrame extends JFrame {
 	private JTextField TxtEmail;
 	private JTextField TxtAdresse;
 	private JPasswordField PswMotDePasse;
-	AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
-	DAO<Artiste> artisteDAO = adf.getArtisteDAO();
-	DAO<Client> clientDAO = adf.getClientDAO();
-	DAO<Organisateur> organisateurDAO = adf.getOrganisateurDAO();
 
 	/**
 	 * Launch the application.
@@ -84,7 +78,7 @@ public class EnregistrerFrame extends JFrame {
 				{
 					@SuppressWarnings("deprecation")
 					Client p = new Client(TxtNom.getText(),TxtPrenom.getText(),TxtAdresse.getText(),TxtEmail.getText(),PswMotDePasse.getText());
-					clientDAO.create(p);
+					p.creer();
 					MenuClient menuClient = new MenuClient((Client) p);
 					contentPane.setVisible(false);
 					menuClient.setVisible(true);
@@ -93,13 +87,13 @@ public class EnregistrerFrame extends JFrame {
 				{
 					@SuppressWarnings("deprecation")
 					Artiste p = new Artiste(TxtNom.getText(),TxtPrenom.getText(),TxtAdresse.getText(),TxtEmail.getText(),PswMotDePasse.getText());
-					artisteDAO.create(p);
+					p.creer();
 				}
 				else if(RadioOrganisateur.isSelected()) 
 				{
 					@SuppressWarnings("deprecation")
 					Organisateur p = new Organisateur(TxtNom.getText(),TxtPrenom.getText(),TxtAdresse.getText(),TxtEmail.getText(),PswMotDePasse.getText());
-					organisateurDAO.create(p);
+					p.creer();
 					MenuOrganisateur creationSpectacle = new MenuOrganisateur((Organisateur) p);
 					contentPane.setVisible(false);
 					creationSpectacle.setVisible(true);

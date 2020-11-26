@@ -266,7 +266,7 @@ public class CreationSpectacle extends JFrame {
 							}
 						}
 						s.setConfiguration(config);
-						s.ajouterSpectacle(ps);
+						o.ajouterSpectacle(s,ps);
 						contentPane.add(BtnMenu);
 					}
 					else

@@ -10,6 +10,8 @@ import DAO.OrganisateurDAO;
 public class Organisateur extends Personne implements Serializable{
 	AbstractDAOFactory adf = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY);
 	DAO<Organisateur> organisateurDAO = adf.getOrganisateurDAO();
+
+	private List<Reservation> reservations;
 	public Organisateur(String nom, String prenom, String adresse, String email, String password) {
 		super(nom, prenom, adresse, email, password);
 		// TODO Auto-generated constructor stub
@@ -29,7 +31,6 @@ public class Organisateur extends Personne implements Serializable{
 		this.reservations=reservations;
 	}
 	private static final long serialVersionUID = 6277529504871654921L;
-	private List<Reservation> reservations;
 	public List<Reservation> getReservations() {
 		return reservations;
 	}
@@ -44,10 +45,30 @@ public class Organisateur extends Personne implements Serializable{
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	public boolean ajouterRepresentation(Representation r)
+	{
+		r.ajouterRepresentation();
+		return true;
+	}
 	public void reserverSalle(Reservation r)
 	{
 		System.out.print("Dans Orga");
 		Organisateur o = ((OrganisateurDAO)organisateurDAO).find(this.getEmail());
 		r.creerReservation(o);
+	}
+	public boolean ajouterSpectacle(Spectacle s,PlanningSalle ps)
+	{
+		s.ajouterSpectacle(ps);
+		return true;
+	}
+	public boolean creer()
+	{
+		organisateurDAO.create(this);
+		return true;
+	}
+	public void getReservation()
+	{
+		List<Reservation> res = ((OrganisateurDAO)organisateurDAO).findAll(this.getId());
+		this.setReservations(res);
 	}
 }

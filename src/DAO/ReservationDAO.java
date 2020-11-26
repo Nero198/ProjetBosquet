@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import POJO.Organisateur;
 import POJO.PlanningSalle;
 import POJO.Reservation;
@@ -84,7 +82,6 @@ public class ReservationDAO extends DAO<Reservation> {
 	public List<Reservation> findAll(int Id) {
 		List<Reservation> liste = new ArrayList<>();
 		List<Spectacle> liste2 = new ArrayList<>();
-		List<Spectacle> liste3 = new ArrayList<>();
 		try {
 
 			ResultSet result2 = this.connect
